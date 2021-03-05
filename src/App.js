@@ -5,7 +5,6 @@ import './App.css';
 /* 
     TODO
     * clean up
-    * store colors, be able to set colors from those (so that you're sure to have the right shade each time)
     * save whole image/print
     * have some on the site to be able to modify
     * styling (allow to a grid greater than 23x23)
@@ -19,6 +18,7 @@ class App extends React.Component {
             columns: 23,
             color: "#ffffff",
             cells: [],
+            storedColors: [],
         }
 
         this.handleRowChange = this.handleRowChange.bind(this);
@@ -27,6 +27,8 @@ class App extends React.Component {
         this.updateCells = this.updateCells.bind(this);
         this.changeColor = this.changeColor.bind(this);
         this.applyToAll = this.applyToAll.bind(this);
+        this.storeColor = this.storeColor.bind(this);
+        this.setColor = this.setColor.bind(this);
     }
 
     updateCells(color) {
@@ -54,11 +56,12 @@ class App extends React.Component {
     handleColChange(event) {
         this.setState({ columns: parseInt(event.target.value) });
         this.updateCells();
-
     }
+
     handleColorChange(event) {
         this.setState({ color: event.target.value })
     }
+
     changeColor(i) {
         let cells = [...this.state.cells];
         let changedCell = {...cells[i]};
@@ -66,8 +69,20 @@ class App extends React.Component {
         cells[i] = changedCell;
         this.setState({ cells: cells })
     }
+
     applyToAll(color) {
         this.updateCells(color);
+    }
+
+    storeColor() {
+        const selectedColor = this.state.color;
+        let listOfStored = [...this.state.storedColors];
+        listOfStored = listOfStored.concat(selectedColor);
+        this.setState({ storedColors: listOfStored })
+    }
+
+    setColor(color) {
+        this.setState({ color: color })
     }
 
     render() {
@@ -83,6 +98,14 @@ class App extends React.Component {
                 <input type="color" value={this.state.color} onChange={this.handleColorChange}></input>
                 <button onClick={() => this.applyToAll("#fff")}>Clear all</button>
                 <button onClick={() => this.applyToAll(this.state.color)}>Apply to all</button>
+                <button onClick={this.storeColor}>Store color</button>
+
+                <ul>
+                    {this.state.storedColors.map((color, index) => 
+                        <li style={{ color: color }} key={index} onClick={() => this.setColor(color)}>{index}</li>
+                    )}
+                </ul>
+
 
                 <div className="grid">
                     {this.state.cells.map((item, index) => 

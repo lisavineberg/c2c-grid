@@ -4,8 +4,8 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(23, 20px);
-    grid-template-rows: repeat(23, 20px);
+    grid-template-columns: repeat(var(--cols), 20px);
+    grid-template-rows: repeat(var(--rows), 20px);
 }
 
 .cell {

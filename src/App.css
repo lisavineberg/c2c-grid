@@ -1,13 +1,35 @@
 .App {
-  text-align: center;
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .grid {
+    flex: 1 0 100%;
     display: grid;
     grid-template-columns: repeat(var(--cols), 20px);
     grid-template-rows: repeat(var(--rows), 20px);
+    margin-top: 20px;
 }
 
 .cell {
     outline: 1px solid black;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+.storedImages {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 0;
 }

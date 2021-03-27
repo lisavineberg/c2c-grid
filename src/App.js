@@ -15,6 +15,8 @@ import './App.css';
     * be able to calculate length/weight of wool you need
     * stitch together sqaures of the blanket
     * highlight center row/column (change opacity)
+    * octopus, snail, frog, leopard
+    * be able to store saved animals on a server???
 */
 
 class App extends React.Component {

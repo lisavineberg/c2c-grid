@@ -9,7 +9,6 @@
     display: grid;
     grid-template-columns: repeat(var(--cols), 20px);
     grid-template-rows: repeat(var(--rows), 20px);
-    margin-top: 20px;
 }
 
 .cell {

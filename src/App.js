@@ -17,6 +17,7 @@ import './App.css';
     * highlight center row/column (change opacity)
     * octopus, snail, frog, leopard
     * be able to store saved animals on a server???
+    * be able to minimize inputs
 */
 
 class App extends React.Component {
@@ -10448,25 +10449,33 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <div>
+                <div className="left">
                     <div className="inputs">
-                        <label>How many rows?</label>
-                        <input type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
-                        <label>How many columns?</label>
-                        <input type="number" value={this.state.columns} onChange={this.handleColChange}></input>
-                        <label>Pick a color</label>
-                        <input type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
-                        <label>Name your image</label>
-                        <input type="text" onChange={this.addName}></input>
+                            <h2>Layout <button>Minimize</button></h2>
+                            <label htmlFor="rows">How many rows?</label>
+                            <input id="rows" type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
+                            <label htmlFor="columns">How many columns?</label>
+                            <input id="columns" type="number" value={this.state.columns} onChange={this.handleColChange}></input>
+                        </div>
 
-                    </div>
+                    <div className="inputs">
+                            <h2>Colors</h2>
+                            <label htmlFor="color" >Pick a color</label>
+                            <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                            <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
+                            <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
+                            <button onClick={this.storeColor}>Store color for later use</button>
+                        </div>
 
-                    <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
-                    <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
-                    <button onClick={this.storeColor}>Store color for later use</button>
-                    <button onClick={this.addImage}>Add image</button>
+                    <div className="inputs">
+                            <h2>Storage</h2>
+                            <label htmlFor="name">Name your image</label>
+                            <input id="name" type="text" onChange={this.addName}></input>
+                            <button onClick={this.addImage}>Add image</button>
+                        </div>
+
                 </div>
-                <div>
+                <div className="right">
                     {this.state.storedColors.length > 0 ? 
                                 <ul>
                                     {this.state.storedColors.map((color, index) => 

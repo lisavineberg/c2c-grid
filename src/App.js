@@ -10337,7 +10337,6 @@ class App extends React.Component {
                 },
             ],
             name: "",
-            showSecondGrid: "",
         }
 
         this.handleRowChange = this.handleRowChange.bind(this);
@@ -10352,7 +10351,6 @@ class App extends React.Component {
         this.addName = this.addName.bind(this);
         this.applyStoredImage = this.applyStoredImage.bind(this);
         this.updateColor = this.updateColor.bind(this);
-        this.handleAddGrid = this.handleAddGrid.bind(this);
     }
 
     updateGrid(param) {
@@ -10474,18 +10472,6 @@ class App extends React.Component {
         this.setState({ cells: cells, storedColors: storedColors })
     }
 
-    // create more selects - each select should be able to use this function
-    // so showSecondGrid should be flexible
-    handleAddGrid(event) {
-        const incomingAnimal = event.target.value;
-        let cells = this.state.storedImages.filter(image =>
-            Object.keys(image)[0] === incomingAnimal
-        )[0];
-        cells = Object.values(cells)[0].cells;
-
-        this.setState({ showSecondGrid: cells })
-    }
-
     render() {
         return (
             <div className="App">
@@ -10507,13 +10493,6 @@ class App extends React.Component {
                     <button onClick={this.storeColor}>Store color for later use</button>
                     <button onClick={this.addImage}>Add image</button>
 
-                    <label>Choose second grid</label>
-                    <select onChange={this.handleAddGrid}>
-                        <option value="">Chosoe second grid?</option>
-                        {this.state.storedImages.map((image, index) =>
-                            <option key={index} value={Object.keys(image)[0]}>{Object.keys(image)[0]}</option>
-                        )}
-                    </select>
                 </div>
                 <div>
                     {this.state.storedColors.length > 0 ? 
@@ -10541,15 +10520,6 @@ class App extends React.Component {
                         <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>
                     )}
                 </div>
-
-                {this.state.showSecondGrid ? 
-                    <div className="grid" style={{"--rows": this.state.rows, "--cols": this.state.columns}}>
-                        {this.state.showSecondGrid.map((item, index) =>
-                            <span className="cell" key={index} style={{ backgroundColor: item.color }}></span>
-                        )}
-                    </div>
-                : ""
-                }
             </div>
         );
     }

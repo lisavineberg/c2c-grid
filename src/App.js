@@ -10338,6 +10338,8 @@ class App extends React.Component {
                 },
             ],
             name: "",
+            showLayout: true,
+            showColors: true,
         }
 
         this.handleRowChange = this.handleRowChange.bind(this);
@@ -10351,6 +10353,8 @@ class App extends React.Component {
         this.addImage = this.addImage.bind(this);
         this.addName = this.addName.bind(this);
         this.applyStoredImage = this.applyStoredImage.bind(this);
+        this.minimizeLayout = this.minimizeLayout.bind(this);
+        this.minimizeColors = this.minimizeColors.bind(this);
     }
 
     updateGrid(param) {
@@ -10446,26 +10450,45 @@ class App extends React.Component {
         this.setState({ cells: cells, storedColors: colors })
     }
 
+    minimizeLayout() {
+        this.setState({ showLayout: !this.state.showLayout })
+    }
+
+    minimizeColors() {
+        this.setState({ showColors: !this.state.showColors })
+    }
+
     render() {
         return (
             <div className="App">
                 <div className="left">
-                    <div className="inputs">
-                            <h2>Layout <button>Minimize</button></h2>
-                            <label htmlFor="rows">How many rows?</label>
-                            <input id="rows" type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
-                            <label htmlFor="columns">How many columns?</label>
-                            <input id="columns" type="number" value={this.state.columns} onChange={this.handleColChange}></input>
-                        </div>
+                    <div>
+                        <h2>Layout <button onClick={this.minimizeLayout}>Minimize</button></h2>
+                        {this.state.showLayout ? 
+                            <div className="inputs">
+                                <label htmlFor="rows">How many rows?</label>
+                                <input id="rows" type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
+                                <label htmlFor="columns">How many columns?</label>
+                                <input id="columns" type="number" value={this.state.columns} onChange={this.handleColChange}></input>
+                            </div>
+                            : ""
+                        }
+                    </div>
 
-                    <div className="inputs">
-                            <h2>Colors</h2>
-                            <label htmlFor="color" >Pick a color</label>
-                            <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
-                            <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
-                            <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
-                            <button onClick={this.storeColor}>Store color for later use</button>
-                        </div>
+                    <div>
+                        <h2>Colors <button onClick={this.minimizeColors}>Minimize</button></h2>
+                        {this.state.showColors ? 
+                            <div className="inputs">
+                                <label htmlFor="color">Pick a color</label>
+                                <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                                <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
+                                <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
+                                <button onClick={this.storeColor}>Store color for later use</button>
+                            </div>                        
+                            : ""
+                        }
+
+                    </div>
 
                     <div className="inputs">
                             <h2>Storage</h2>

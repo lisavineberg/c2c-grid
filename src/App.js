@@ -13,10 +13,12 @@ import './App.css';
     * map colors to names of color https://sampleapis.com/api-list/css-color-names
     * count of how many squares of each color (next to the list of stored colors?)
     * be able to calculate length/weight of wool you need
-    * stitch together sqaures of the blanket
+    * stitch together squares of the blanket (drag and drop? choose the layout of the grid - 3x3, 3x4, 4x4 -, and then choose what animals
+    *   go in each cell?)
     * highlight center row/column (change opacity)
     * octopus, snail, frog, leopard
     * be able to store saved animals on a server???
+    * be able to minimize inputs
 */
 
 class App extends React.Component {
@@ -10338,6 +10340,8 @@ class App extends React.Component {
             ],
             name: "",
             showSecondGrid: "",
+            showLayout: true,
+            showColors: true,
         }
 
         this.handleRowChange = this.handleRowChange.bind(this);
@@ -10352,6 +10356,8 @@ class App extends React.Component {
         this.addName = this.addName.bind(this);
         this.applyStoredImage = this.applyStoredImage.bind(this);
         this.handleAddGrid = this.handleAddGrid.bind(this);
+        this.minimizeLayout = this.minimizeLayout.bind(this);
+        this.minimizeColors = this.minimizeColors.bind(this);
     }
 
     updateGrid(param) {
@@ -10441,10 +10447,20 @@ class App extends React.Component {
         }
     }
 
-    applyStoredImage(image) {
-        const cells = Object.values(image)[0].cells;
-        const colors = Object.values(image)[0].storedColors;
-        this.setState({ cells: cells, storedColors: colors })
+    applyStoredImage(event) {
+        const animal = Object.values(this.state.storedImages.filter((image) => {
+            return Object.keys(image)[0] === event.target.value;
+        })[0])[0];
+        const { cells, storedColors } = animal;
+        this.setState({ cells: cells, storedColors: storedColors })
+    }
+
+    minimizeLayout() {
+        this.setState({ showLayout: !this.state.showLayout })
+    }
+
+    minimizeColors() {
+        this.setState({ showColors: !this.state.showColors })
     }
 
     // create more selects - each select should be able to use this function
@@ -10462,56 +10478,92 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <div>
-                    <div className="inputs">
-                        <label>How many rows?</label>
-                        <input type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
-                        <label>How many columns?</label>
-                        <input type="number" value={this.state.columns} onChange={this.handleColChange}></input>
-                        <label>Pick a color</label>
-                        <input type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
-                        <label>Name your image</label>
-                        <input type="text" onChange={this.addName}></input>
+                <h1>C2C blanket guide</h1>
+                <p>Create custom corner-to-corner blankets based on ChiWei's <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">"zoodiac" afghan</a>. Create your own pattern, or modify one from the library.</p>
+                <div className="content">
+                    <div>
+                        {/* Colors */}
+                        <div className="flex">
+                            <div className="inputs">
+                                <h2>Colors 
+                                    {/* <button onClick={this.minimizeColors}>Minimize</button> */}
+                                </h2>
+                                <label htmlFor="color">Pick a color</label>
+                                <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                                <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
+                                <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
+                                <button onClick={this.storeColor}>Add to color palette</button>
+                            </div>
 
+                            {this.state.storedColors.length > 0 ? 
+                                <div>
+                                    <h2>Color Palette</h2>
+                                    <ul className="color-palette">
+                                        {this.state.storedColors.map((color, index) => 
+                                            <li className="color-palette__item"key={index} onClick={() => this.setColor(color)}>
+                                                Color {index + 1}
+                                                <span className="swatch" style={{ backgroundColor: color }} ></span>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </div>
+                                :
+                                ""
+                            }
+                        </div>
+
+                        {/* Second grid? */}
+                        <div>
+                            <label>Choose second grid</label>
+                            <select onChange={this.handleAddGrid}>
+                                <option value="">Chosoe second grid?</option>
+                                {this.state.storedImages.map((image, index) =>
+                                    <option key={index} value={Object.keys(image)[0]}>{Object.keys(image)[0]}</option>
+                                )}
+                            </select>
+                        </div>
+                
+                        {/* Library */}
+                        <div>
+                            <h2>Library</h2>
+                            <select className="" onChange={this.applyStoredImage}>
+                                <option value="">Choose an animal</option>
+                                {this.state.storedImages.map((image, index) => 
+                                    <option key={index} value={Object.keys(image)[0]}>{Object.keys(image)[0]}</option>
+                                )}
+                            </select>
+                        </div>
+
+                        {/* Layout */}
+                        <div>
+                            <h2>Layout
+                                {/* <button onClick={this.minimizeLayout}>Minimize</button> */}
+                            </h2>
+                            {this.state.showLayout ? 
+                                <div className="inputs">
+                                    <label htmlFor="rows">How many rows?</label>
+                                    <input id="rows" type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
+                                    <label htmlFor="columns">How many columns?</label>
+                                    <input id="columns" type="number" value={this.state.columns} onChange={this.handleColChange}></input>
+                                </div>
+                                : ""
+                            }
+                        </div>
+
+                        {/* Storage */}
+                        <div className="inputs">
+                            <h2>Storage</h2>
+                            <label htmlFor="name">Name your image</label>
+                            <input id="name" type="text" onChange={this.addName}></input>
+                            <button onClick={this.addImage}>Add image</button>
+                        </div>
                     </div>
 
-                    <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
-                    <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
-                    <button onClick={this.storeColor}>Store color for later use</button>
-                    <button onClick={this.addImage}>Add image</button>
-                
-                    <label>Choose second grid</label>
-                    <select onChange={this.handleAddGrid}>
-                        <option value="">Chosoe second grid?</option>
-                        {this.state.storedImages.map((image, index) =>
-                            <option key={index} value={Object.keys(image)[0]}>{Object.keys(image)[0]}</option>
-                        )}
-                    </select>
-                
-                </div>
-                <div>
-                    {this.state.storedColors.length > 0 ? 
-                                <ul>
-                                    {this.state.storedColors.map((color, index) => 
-                                        <li style={{ color: color }} key={index} onClick={() => this.setColor(color)}>
-                                            Color {index + 1}
-                                        </li>
-                                    )}
-                                </ul>
-                        :
-                        ""
-                    }
-                    <ul className="storedImages">
-                        {this.state.storedImages.map((image, index) => 
-                            <button key={index} onClick={() => this.applyStoredImage(image)}>{Object.keys(image)[0]}</button>
-                        )}
-                    </ul>
-                </div>
-
-                <div className="grid" style={{"--rows": this.state.rows, "--cols": this.state.columns}}>
-                    {this.state.cells.map((item, index) => 
-                        <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>)
-                    }
+                    <div className="grid" style={{"--rows": this.state.rows, "--cols": this.state.columns}}>
+                        {this.state.cells.map((item, index) => 
+                            <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>)
+                        }
+                    </div>
                 </div>
 
                 {this.state.showSecondGrid ? 

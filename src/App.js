@@ -10475,14 +10475,10 @@ class App extends React.Component {
         })
 
         let storedColors = this.state.storedColors;
-        console.log("stored colors 1", storedColors)
-        storedColors.forEach(function(storedColor) {
-            console.log("color / stored color", color, storedColor)
-            if (storedColor === color) {
-                storedColor = newColor;
-            }
-        })
-        console.log("stored colors 2", storedColors)
+        const index = storedColors.indexOf(color);
+        if (index > -1) {
+            storedColors[index] = newColor
+        }
 
         this.setState({ cells: cells, storedColors: storedColors })
     }

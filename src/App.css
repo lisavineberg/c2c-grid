@@ -19,7 +19,6 @@ button {
     border: 1px solid black;
     color: black;
     font-family: 'Open Sans';
-    margin-bottom: 20px;
     max-width: 200px;
     padding: 5px;
 }
@@ -51,6 +50,10 @@ button:hover {
     margin-right: 20px;
 }
 
+.inputs button {
+    margin-bottom: 20px;
+}
+
 input {
     margin-bottom: 20px;
     width: 200px;
@@ -61,6 +64,7 @@ input {
 }
 
 .color-palette__item {
+    align-items: center;
     display: flex;
     margin-bottom: 4px
 }

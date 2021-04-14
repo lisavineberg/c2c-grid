@@ -66,13 +66,27 @@ input {
 .color-palette__item {
     align-items: center;
     display: flex;
-    margin-bottom: 4px
+    margin-bottom: 4px;
+}
+
+.color-palette__item button {
+    margin-right: 10px;
 }
 
 .swatch {
     border: 1px solid black;
     display: inline-block;
     height: 20px;
-    margin-left: 20px;
+    margin: 0 10px;
     width: 20px;
+}
+
+input[type="color"] {
+    margin-bottom: 0;
+    margin-right: 5px;
+    width: 30px;
+}
+
+.color-picker {
+    margin-bottom: 20px;
 }

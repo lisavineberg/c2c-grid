@@ -10496,8 +10496,10 @@ class App extends React.Component {
                                 <h2>Colors 
                                     {/* <button onClick={this.minimizeColors}>Minimize</button> */}
                                 </h2>
-                                <label htmlFor="color">Pick a color</label>
-                                <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                                <div className="color-picker flex">
+                                    <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                                    <label htmlFor="color">Pick a color</label>
+                                </div>
                                 <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
                                 <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
                                 <button onClick={this.storeColor}>Add to color palette</button>

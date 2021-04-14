@@ -10898,6 +10898,7 @@ class App extends React.Component {
         this.addImage = this.addImage.bind(this);
         this.addName = this.addName.bind(this);
         this.applyStoredImage = this.applyStoredImage.bind(this);
+        this.updateColor = this.updateColor.bind(this);
         this.minimizeLayout = this.minimizeLayout.bind(this);
         this.minimizeColors = this.minimizeColors.bind(this);
     }
@@ -10925,7 +10926,7 @@ class App extends React.Component {
         let grid = [];
         for (let i=0; i < rows; i++) {
             for (let j=0; j < columns; j++) {
-                grid.push({ color: color});
+                grid.push({ color: color });
             }
         }
         this.setState({ cells: grid })
@@ -11005,6 +11006,28 @@ class App extends React.Component {
         this.setState({ showColors: !this.state.showColors })
     }
 
+    updateColor(color) {
+        // incoming color is the stored color
+        // take state color
+        // in storedColors list, replace color param with state color
+        // in grid, if color has color param, replace with state color
+        const newColor = this.state.selectedColor;
+        let cells = this.state.cells;
+        cells.forEach(function(cell) {
+            if (cell.color === color) {
+                cell.color = newColor;
+            }
+        })
+
+        let storedColors = this.state.storedColors;
+        const index = storedColors.indexOf(color);
+        if (index > -1) {
+            storedColors[index] = newColor
+        }
+
+        this.setState({ cells: cells, storedColors: storedColors })
+    }
+
     render() {
         return (
             <div className="App">
@@ -11018,8 +11041,10 @@ class App extends React.Component {
                                 <h2>Colors 
                                     {/* <button onClick={this.minimizeColors}>Minimize</button> */}
                                 </h2>
-                                <label htmlFor="color">Pick a color</label>
-                                <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                                <div className="color-picker flex">
+                                    <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                                    <label htmlFor="color">Pick a color</label>
+                                </div>
                                 <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
                                 <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
                                 <button onClick={this.storeColor}>Add to color palette</button>
@@ -11030,9 +11055,11 @@ class App extends React.Component {
                                     <h2>Color Palette</h2>
                                     <ul className="color-palette">
                                         {this.state.storedColors.map((color, index) => 
-                                            <li className="color-palette__item"key={index} onClick={() => this.setColor(color)}>
+                                            <li className="color-palette__item" key={index}>
                                                 Color {index + 1}
                                                 <span className="swatch" style={{ backgroundColor: color }} ></span>
+                                                <button onClick={() => this.setColor(color)}>Use this color</button>
+                                                <button onClick={() => this.updateColor(color)}>Update this color</button>
                                             </li>
                                         )}
                                     </ul>
@@ -11042,7 +11069,8 @@ class App extends React.Component {
                             }
                         </div>
 
-                        {/* Library */}
+                        
+                    {/* Library */}
                         <div>
                             <h2>Library</h2>
                             <select className="" onChange={this.applyStoredImage}>
@@ -11080,15 +11108,13 @@ class App extends React.Component {
 
                     <div className="grid" style={{"--rows": this.state.rows, "--cols": this.state.columns}}>
                         {this.state.cells.map((item, index) => 
-                            <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>)
-                        }
-                    </div>
+                            <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>
+                        )}
                 </div>
+            </div>
             </div>
         );
     }
 }
 
 export default App;
-
-

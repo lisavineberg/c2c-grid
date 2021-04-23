@@ -1,7 +1,35 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: local('OpenSans-Regular'), url('./fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+}
+
 .App {
     padding: 40px;
+    font-family: 'Open Sans';
+}
+
+.content {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+}
+
+button {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    font-family: 'Open Sans';
+    max-width: 200px;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+.flex {
     display: flex;
-    flex-wrap: wrap;
 }
 
 .grid {
@@ -19,6 +47,11 @@
 .inputs {
     display: flex;
     flex-direction: column;
+    margin-right: 20px;
+}
+
+.inputs button {
+    margin-bottom: 20px;
 }
 
 input {
@@ -26,10 +59,34 @@ input {
     width: 200px;
 }
 
-.storedImages {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    column-gap: 20px;
-    row-gap: 20px;
+.color-palette {
     padding: 0;
+}
+
+.color-palette__item {
+    align-items: center;
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.color-palette__item button {
+    margin-right: 10px;
+}
+
+.swatch {
+    border: 1px solid black;
+    display: inline-block;
+    height: 20px;
+    margin: 0 10px;
+    width: 20px;
+}
+
+input[type="color"] {
+    margin-bottom: 0;
+    margin-right: 5px;
+    width: 30px;
+}
+
+.color-picker {
+    margin-bottom: 20px;
 }

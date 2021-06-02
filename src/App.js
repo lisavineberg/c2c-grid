@@ -13163,6 +13163,20 @@ class App extends React.Component {
             newImage[name] = {cells: cells, storedColors: colors};
             images = images.concat(newImage);
             this.setState({ storedImages: images });
+            
+            const body = newImage;
+            fetch("/test", { 
+                method: "POST",
+                body: (JSON.stringify(body))
+            })
+            .then(response => response.text())
+            .then((response) => {
+                const parsedResponse = JSON.parse(response);
+                console.log("parsed", parsedResponse)
+            })
+            .catch((error) => {
+                console.log("error", error)
+            })
         }
     }
 

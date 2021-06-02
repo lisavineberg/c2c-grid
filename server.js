@@ -28,9 +28,23 @@ async function insert(image) {
     })
 }
 
-app.post('/test', (req, res) => {
+async function getImage(image) {
+    const client = await connect();
+    const collection = client.db("stored_images").collection("stored_images");
+    const foundImage = await collection.findOne({ name: image })
+
+    return foundImage
+}
+
+app.post('/addImageToDb', (req, res) => {
     const parsedBody = JSON.parse(req.body.toString());
     insert(parsedBody);
+})
+
+app.post('/getImageFromDb', async(req, res) => {
+    const animal = JSON.parse(req.body.toString()).name;
+    const image = await getImage(animal);
+    res.send(image)
 })
 
 app.listen(port, () => {

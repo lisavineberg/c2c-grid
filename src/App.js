@@ -8,7 +8,6 @@ import './App.css';
     * save whole image/print
     * styled components?
     * random animal generator
-    * be able to select all spans of a certain color on the page (to change them to another color?)
     * styling
     * map colors to names of color https://sampleapis.com/api-list/css-color-names
     * count of how many squares of each color (next to the list of stored colors?)
@@ -28,9 +27,11 @@ class App extends React.Component {
             selectedColor: "#ffffff",
             cells: [],
             storedColors: [],
+            storedImages: [],
             name: "",
             showLayout: true,
             showColors: true,
+            imageStored: "",
         }
 
         this.handleRowChange = this.handleRowChange.bind(this);
@@ -80,6 +81,12 @@ class App extends React.Component {
 
     componentDidMount() {
         this.updateGrid();
+        fetch("/getStoredImages")
+        .then(response => response.text())
+        .then((response) => {
+            const parsedResponse = JSON.parse(response);
+            this.setState({ storedImages: parsedResponse })
+        })
     }
 
     handleRowChange(event) {
@@ -128,18 +135,19 @@ class App extends React.Component {
             const name = this.state.name;
             const cells = this.state.cells;
             const colors = this.state.storedColors
-            let newImage = {}
-            newImage = {name, cells: cells, storedColors: colors};
+            const newImage = {name, cells: cells, storedColors: colors};
             
-            const body = newImage;
             fetch("/addImageToDb", { 
                 method: "POST",
-                body: (JSON.stringify(body))
+                body: (JSON.stringify(newImage))
             })
             .then(response => response.text())
             .then((response) => {
-                const parsedResponse = JSON.parse(response);
-                console.log("parsed", parsedResponse)
+                if (response === "valid") {
+                    this.setState({ imageStored: "success" })
+                } else if (response === "invalid") {
+                    this.setState({ imageStored: "error" })
+                }
             })
             .catch((error) => {
                 console.log("error", error)
@@ -240,30 +248,13 @@ class App extends React.Component {
                             <p>Animals with a star denote animals originally from ChiWei's pattern</p>
                             <select className="" onChange={this.applyStoredImage}>
                                 <option value="">Choose an animal</option>
-                                <option value="bear">bear</option>
-                                <option value="calico">calico</option>
-                                <option value="dog">dog</option>
-                                <option value="dragon">dragon</option>
-                                <option value="elephant">elephant</option>
-                                <option value="fox">fox</option>
-                                <option value="hippo">hippo</option>
-                                <option value="horse">horse</option>
-                                <option value="lion">lion</option>
-                                <option value="monkey">monkey</option>
-                                <option value="ox">ox</option>
-                                <option value="panda">panda</option>
-                                <option value="peacock">peacock</option>
-                                <option value="pig">pig</option>
-                                <option value="rabbit">rabbit</option>
-                                <option value="raccoon">raccoon</option>
-                                <option value="rat">rat</option>
-                                <option value="rooster">rooster</option>
-                                <option value="sheep">sheep</option>
-                                <option value="snake">snake</option>
-                                <option value="tiger">tiger</option>
-                                <option value="whale">whale</option>                                
-                                <option value="zebra_skinny">zebra - skinny</option>
-                                <option value="zebra_wide">zebra - wide</option>
+                                {this.state.storedImages.sort(function(a, b) {
+                                    if(a < b) { return -1 };
+                                    if(b > a) { return 1 };
+                                    return 0;
+                                }).map((image, index) => 
+                                    <option key={index} value={image}>{image.replace("_", " ")}</option>
+                                )}
                             </select>
                         </div>
 
@@ -288,6 +279,11 @@ class App extends React.Component {
                             <h2>Storage</h2>
                             <label htmlFor="name">Name your image</label>
                             <input id="name" type="text" onChange={this.addName}></input>
+                            {this.state.imageStored === "" ? 
+                                "" : 
+                                this.state.imageStored === "success" ? 
+                                    <p>Image successfully stored</p> :
+                                    <p>The image already exists in the DB, please rename.</p>}
                             <button onClick={this.addImage}>Add image</button>
                         </div>
                     </div>

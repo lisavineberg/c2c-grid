@@ -9,6 +9,13 @@ const dotenv = require("dotenv")
 
 dotenv.config();
 app.use(bodyParser.raw({ type: "*/*" }))
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 const uri = `mongodb+srv://c2c-grid:${process.env.DB_PASSWORD}@c2c-grid.ootp8.mongodb.net/stored_images?retryWrites=true&w=majority`;
 let con;
 

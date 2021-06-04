@@ -7,6 +7,9 @@ const port = 8080;
 const MongoClient = require("mongodb").MongoClient;
 const dotenv = require("dotenv")
 
+//  
+const path = require('path');
+
 dotenv.config();
 app.use(bodyParser.raw({ type: "*/*" }))
 
@@ -15,6 +18,14 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+// 
 
 const uri = `mongodb+srv://c2c-grid:${process.env.DB_PASSWORD}@c2c-grid.ootp8.mongodb.net/stored_images?retryWrites=true&w=majority`;
 let con;

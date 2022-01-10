@@ -1,6 +1,6 @@
 1. `npm start`
 2. in separate terminal, `npm run cypress` to start cypress
-3. Netlift server: https://hungry-wozniak-496878.netlify.app/
+3. Netlify server: https://hungry-wozniak-496878.netlify.app/
 
 
 

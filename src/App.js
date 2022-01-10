@@ -13250,7 +13250,7 @@ class App extends React.Component {
                         <div>
                             <h2>Library</h2>
                             <p>Animals with a star denote animals originally from ChiWei's pattern</p>
-                            <select className="" onChange={this.applyStoredImage}>
+                            <select className="cypress-test-animals" onChange={this.applyStoredImage}>
                                 <option value="">Choose an animal</option>
                                 {this.state.storedImages.sort(function(a, b) {
                                     if(Object.keys(a)[0] < Object.keys(b)[0]) { return -1 };

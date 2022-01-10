@@ -1,3 +1,9 @@
+1. `npm start`
+2. in separate terminal, `npm run cypress` to start cypress
+3. Netlift server: https://hungry-wozniak-496878.netlify.app/
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

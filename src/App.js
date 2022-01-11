@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+// import ColorPalette from './ColorPalette';
 // import Cell from './Cell';
 
 /* 
@@ -18021,24 +18022,9 @@ class App extends React.Component {
             showLayout: true,
             showColors: true,
         }
-
-        this.handleRowChange = this.handleRowChange.bind(this);
-        this.handleColChange = this.handleColChange.bind(this);
-        this.handleColorInputChange = this.handleColorInputChange.bind(this);
-        this.updateGrid = this.updateGrid.bind(this);
-        this.changeCellColor = this.changeCellColor.bind(this);
-        this.applyToAll = this.applyToAll.bind(this);
-        this.storeColor = this.storeColor.bind(this);
-        this.setColor = this.setColor.bind(this);
-        this.addImage = this.addImage.bind(this);
-        this.addName = this.addName.bind(this);
-        this.applyStoredImage = this.applyStoredImage.bind(this);
-        this.updateColor = this.updateColor.bind(this);
-        this.minimizeLayout = this.minimizeLayout.bind(this);
-        this.minimizeColors = this.minimizeColors.bind(this);
     }
 
-    updateGrid(param) {
+    updateGrid = (param) => {
         let color = this.state.color || "#fff";
         let rows = this.state.rows;
         let columns = this.state.columns;
@@ -18067,25 +18053,22 @@ class App extends React.Component {
         this.setState({ cells: grid })
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.updateGrid();
     }
 
-    handleRowChange(event) {
-        this.setState({ rows: parseInt(event.target.value) });
-        this.updateGrid({ "rows": parseInt(event.target.value) });
+    handleRowOrColChange = (event) => {
+      console.log("event", event);
+      const {name, value} = event.target;
+      this.setState({ [name]: parseInt(value) });
+      this.updateGrid({ [name]: parseInt(value) });
     }
 
-    handleColChange(event) {
-        this.setState({ columns: parseInt(event.target.value) });
-        this.updateGrid({ "columns": parseInt(event.target.value) });
-    }
-
-    handleColorInputChange(event) {
+    handleColorInputChange = (event) => {
         this.setState({ selectedColor: event.target.value })
     }
 
-    changeCellColor(i) {
+    changeCellColor = (i) => {
         let cells = [...this.state.cells];
         let changedCell = {...cells[i]};
         changedCell.color = this.state.selectedColor;
@@ -18093,26 +18076,26 @@ class App extends React.Component {
         this.setState({ cells: cells })
     }
 
-    applyToAll(color) {
+    applyToAll = (color) => {
         this.updateGrid({ "color": color });
     }
 
-    storeColor() {
+    storeColor = () => {
         const selectedColor = this.state.selectedColor;
         let listOfStored = [...this.state.storedColors];
         listOfStored = listOfStored.concat(selectedColor);
         this.setState({ storedColors: listOfStored })
     }
 
-    setColor(color) {
+    setColor = (color) => {
         this.setState({ selectedColor: color })
     }
 
-    addName(event) {
+    addName = (event) => {
         this.setState({ name: event.target.value })
     }
 
-    addImage() {
+    addImage = () => {
         if (this.state.name) {
             let images = [...this.state.storedImages];
             const name = this.state.name;
@@ -18125,7 +18108,7 @@ class App extends React.Component {
         }
     }
 
-    applyStoredImage(event) {
+    applyStoredImage = (event) => {
         const animal = Object.values(this.state.storedImages.filter((image) => {
             return Object.keys(image)[0] === event.target.value;
         })[0])[0];
@@ -18135,37 +18118,38 @@ class App extends React.Component {
         this.setState({ cells: cells, storedColors: storedColors, rows: rows, columns: columns })
     }
 
-    minimizeLayout() {
+    minimizeLayout = () => {
         this.setState({ showLayout: !this.state.showLayout })
     }
 
-    minimizeColors() {
+    minimizeColors = () => {
         this.setState({ showColors: !this.state.showColors })
     }
 
-    updateColor(color) {
-        // incoming color is the stored color
-        // take state color
-        // in storedColors list, replace color param with state color
-        // in grid, if color has color param, replace with state color
-        const newColor = this.state.selectedColor;
-        let cells = this.state.cells;
-        cells.forEach(function(cell) {
-            if (cell.color === color) {
-                cell.color = newColor;
-            }
-        })
 
-        let storedColors = this.state.storedColors;
-        const index = storedColors.indexOf(color);
-        if (index > -1) {
-            storedColors[index] = newColor
-        }
+    updateColor = (color) => {
+      // incoming color is the stored color
+      // take state color
+      // in storedColors list, replace color param with state color
+      // in grid, if color has color param, replace with state color
+      const newColor = this.state.selectedColor;
+      let cells = this.state.cells;
+      cells.forEach(function(cell) {
+          if (cell.color === color) {
+              cell.color = newColor;
+          }
+      })
 
-        this.setState({ cells: cells, storedColors: storedColors })
+      let storedColors = this.state.storedColors;
+      const index = storedColors.indexOf(color);
+      if (index > -1) {
+          storedColors[index] = newColor
+      }
+
+      this.setState({ cells: cells, storedColors: storedColors })
     }
 
-    render() {
+    render = () => {
         return (
             <div className="App">
                 <h1>C2C blanket guide</h1>
@@ -18231,9 +18215,9 @@ class App extends React.Component {
                             {this.state.showLayout ? 
                                 <div className="inputs">
                                     <label htmlFor="rows">How many rows?</label>
-                                    <input id="rows" type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
+                                    <input id="rows" name="rows" type="number" value={this.state.rows} onChange={this.handleRowOrColChange}></input>
                                     <label htmlFor="columns">How many columns?</label>
-                                    <input id="columns" type="number" value={this.state.columns} onChange={this.handleColChange}></input>
+                                    <input id="columns" name="columns" type="number" value={this.state.columns} onChange={this.handleRowOrColChange}></input>
                                 </div>
                                 : ""
                             }

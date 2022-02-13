@@ -1,15 +1,15 @@
 import { client, q } from '../db'
 
-const getAllNotes = client.query(
+const fetchAll = () => client.query(
   q.Paginate(
     q.Match(
-      q.Ref('indexes/all_notes')))
+      q.Ref('indexes/all_animals')))
 )
   .then(response => {
-    const notesRefs = response.data
+    const animalsRefs = response.data;
     // create new query out of notes refs. 
     // https://docs.fauna.com/fauna/current/api/fql/
-    const getAllProductDataQuery = notesRefs.map((ref) => {
+    const getAllProductDataQuery = animalsRefs.map((ref) => {
       return q.Get(ref)
     })
     // query the refs
@@ -17,4 +17,4 @@ const getAllNotes = client.query(
   })
   .catch(error => console.warn('error', error.message))
 
-export default getAllNotes;
+export default fetchAll;

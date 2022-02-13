@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import ColorPalette from './ColorPalette';
 // import Cell from './Cell';
+import { create } from './api';
 
 /* 
   TODO
@@ -18133,7 +18134,7 @@ class App extends React.Component {
     this.setState({ selectedColor: color })
   }
 
-    applyStoredImage = (event) => {
+  applyStoredImage = (event) => {
         const animal = Object.values(this.state.storedImages.filter((image) => {
             return Object.keys(image)[0] === event.target.value;
         })[0])[0];
@@ -18141,23 +18142,32 @@ class App extends React.Component {
         rows = rows || 23;
         columns = columns || 23;
         this.setState({ cells: cells, storedColors: storedColors, rows: rows, columns: columns })
-    }
+  }
 
-    addName = (event) => {
-      this.setState({ name: event.target.value })
+  addName = (event) => {
+    this.setState({ name: event.target.value })
     }
 
   addImage = () => {
-    if (this.state.name) {
-      let images = [...this.state.storedImages];
-      const name = this.state.name;
-      const cells = this.state.cells;
-      const colors = this.state.storedColors
-      let newImage = {}
-      newImage[name] = {cells: cells, storedColors: colors};
-      images = images.concat(newImage);
-      this.setState({ storedImages: images });
+    const grid = {
+      name: this.state.name,
+      rows: this.state.rows,
+      columns: this.state.columns,
+      colors: this.state.storedColors,
+      cells: this.state.cells
     }
+
+    create(grid);
+    // if (this.state.name) {
+    //   let images = [...this.state.storedImages];
+    //   const name = this.state.name;
+    //   const cells = this.state.cells;
+    //   const colors = this.state.storedColors
+    //   let newImage = {}
+    //   newImage[name] = {cells: cells, storedColors: colors};
+    //   images = images.concat(newImage);
+    //   this.setState({ storedImages: images });
+    // }
   }
 
   minimizeLayout = () => {

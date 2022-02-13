@@ -18213,7 +18213,7 @@ class App extends React.Component {
                 <button onClick={this.storeColor}>Add to color palette</button>
               </div>
 
-              {this.state.storedColors.length > 0 ? 
+              {this.state.storedColors.length &&
                 <div>
                   <h2>Color Palette</h2>
                   <ColorPalette
@@ -18221,10 +18221,7 @@ class App extends React.Component {
                     setColor={this.setColor}
                     storedColors={this.state.storedColors}
                   ></ColorPalette>
-                </div>
-                :
-                ""
-              }
+                </div>}
             </div>
 
             
@@ -18249,14 +18246,13 @@ class App extends React.Component {
               <h2>Layout
                 {/* <button onClick={this.minimizeLayout}>Minimize</button> */}
               </h2>
-              {this.state.showLayout ? 
+              {this.state.showLayout && 
                 <div className="inputs">
                   <label htmlFor="rows">How many rows?</label>
                   <input id="rows" name="rows" type="number" value={this.state.rows} onChange={this.handleRowOrColChange}></input>
                   <label htmlFor="columns">How many columns?</label>
                   <input id="columns" name="columns" type="number" value={this.state.columns} onChange={this.handleRowOrColChange}></input>
                 </div>
-                : ""
               }
             </div>
 

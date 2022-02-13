@@ -18246,14 +18246,14 @@ class App extends React.Component {
               <h2>Layout
                 {/* <button onClick={this.minimizeLayout}>Minimize</button> */}
               </h2>
-              {this.state.showLayout && 
+              {/* {this.state.showLayout &&  */}
                 <div className="inputs">
                   <label htmlFor="rows">How many rows?</label>
                   <input id="rows" name="rows" type="number" value={this.state.rows} onChange={this.handleRowOrColChange}></input>
                   <label htmlFor="columns">How many columns?</label>
                   <input id="columns" name="columns" type="number" value={this.state.columns} onChange={this.handleRowOrColChange}></input>
                 </div>
-              }
+              {/* } */}
             </div>
 
             {/* Storage */}

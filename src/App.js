@@ -1,34 +1,35 @@
 import React from 'react';
 import './App.css';
+import ColorPalette from './ColorPalette';
 // import Cell from './Cell';
 
 /* 
-    TODO
-    * clean up
-    * save whole image/print
-    * styled components?
-    * random animal generator
-    * be able to select all spans of a certain color on the page (to change them to another color?)
-    * styling
-    * map colors to names of color https://sampleapis.com/api-list/css-color-names
-    * count of how many squares of each color (next to the list of stored colors?)
-    * be able to calculate length/weight of wool you need
-    * stitch together sqaures of the blanket
-    * highlight center row/column (change opacity)
-    * be able to store saved animals on a server???
-    * be able to minimize inputs
+  TODO
+  * clean up
+  * save whole image/print
+  * styled components?
+  * random animal generator
+  * be able to select all spans of a certain color on the page (to change them to another color?)
+  * styling
+  * map colors to names of color https://sampleapis.com/api-list/css-color-names
+  * count of how many squares of each color (next to the list of stored colors?)
+  * be able to calculate length/weight of wool you need
+  * stitch together sqaures of the blanket
+  * highlight center row/column (change opacity)
+  * be able to store saved animals on a server???
+  * be able to minimize inputs
 */
 
 class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            rows: 23,
-            columns: 23,
-            selectedColor: "#ffffff",
-            cells: [],
-            storedColors: [],
-            storedImages: [
+  constructor() {
+      super();
+      this.state = {
+          rows: 23,
+          columns: 23,
+          selectedColor: "#ffffff",
+          cells: [],
+          storedColors: [],
+          storedImages: [
                 {
                   "winnie": {
                     rows: 35,
@@ -2511,7 +2512,6 @@ class App extends React.Component {
                   "tigger": {
                     rows: 35,
                     columns: 35,
-                    selectedColor: "#000000",
                     cells: [
                       {color: "#ffb22e"},
                       {color: "#ffb22e"},
@@ -4989,8 +4989,10 @@ class App extends React.Component {
                   }
                 },
                 {
-                    "lion": {
-                        cells: [
+                  "lion": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                         {color: "#a00d0d"},
                         {color: "#a00d0d"},
                         {color: "#a00d0d"},
@@ -5520,564 +5522,566 @@ class App extends React.Component {
                         {color: "#a00d0d"},
                         {color: "#a00d0d"},
                         {color: "#a00d0d"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                         "#f9f343",
                         "#ec9e18",
                         "#a00d0d",
                         "#000000",
                         "#fffbf0"
-                        ],
+                    ],
                   }
                 },
                 {
-                    "hippo": 
-                    {
-                        cells: [
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#ff99c2"},
-                          {color: "#ff99c2"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#ff99c2"},
-                          {color: "#ff99c2"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#ff99c2"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#ff99c2"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#000000"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#000000"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#ffffff"},
-                          {color: "#ffffff"},
-                          {color: "#ffffff"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#ffffff"},
-                          {color: "#ffffff"},
-                          {color: "#ffffff"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#550764"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#966ab4"},
-                          {color: "#550764"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"},
-                          {color: "#2fb65e"}
-                        ],
-                        storedColors: [
-                          "#2fb65e",
-                          "#966ab4",
-                          "#ffffff",
-                          "#550764",
-                          "#ff99c2",
-                          "#000000"
-                        ],
-                    
-                      }
+                  "hippo": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#ff99c2"},
+                            {color: "#ff99c2"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#ff99c2"},
+                            {color: "#ff99c2"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#ff99c2"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#ff99c2"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#000000"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#000000"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#ffffff"},
+                            {color: "#ffffff"},
+                            {color: "#ffffff"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#ffffff"},
+                            {color: "#ffffff"},
+                            {color: "#ffffff"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#550764"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#966ab4"},
+                            {color: "#550764"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"},
+                            {color: "#2fb65e"}
+                    ],
+                    storedColors: [
+                            "#2fb65e",
+                            "#966ab4",
+                            "#ffffff",
+                            "#550764",
+                            "#ff99c2",
+                            "#000000"
+                    ], 
+                  }
                 },
                 {
-                    "panda": {
-                        cells: [
+                  "panda": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#4a3e74"},
                           {color: "#4a3e74"},
                           {color: "#4a3e74"},
@@ -6607,18 +6611,20 @@ class App extends React.Component {
                           {color: "#4a3e74"},
                           {color: "#4a3e74"},
                           {color: "#4a3e74"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#4a3e74",
                           "#000000",
                           "#ffffff",
                           "#7dbdd8"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "fox": {
-                        cells: [
+                  "fox": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#908823"},
                           {color: "#908823"},
                           {color: "#908823"},
@@ -7148,20 +7154,22 @@ class App extends React.Component {
                           {color: "#908823"},
                           {color: "#908823"},
                           {color: "#908823"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#908823",
                           "#f91515",
                           "#7a1515",
                           "#f5edd6",
                           "#000000",
                           "#f4d6f5"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "whale": {
-                        cells: [
+                  "whale": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#f3d644"},
                           {color: "#f3d644"},
                           {color: "#f3d644"},
@@ -7691,19 +7699,21 @@ class App extends React.Component {
                           {color: "#f3d644"},
                           {color: "#f3d644"},
                           {color: "#f3d644"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#f3d644",
                           "#6b6b6b",
                           "#bbb9b9",
                           "#82a4e3",
                           "#000000"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "elephant": {
-                        cells: [
+                  "elephant": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#ff8838"},
                           {color: "#ff8838"},
                           {color: "#ff8838"},
@@ -8233,19 +8243,21 @@ class App extends React.Component {
                           {color: "#ff8838"},
                           {color: "#ff8838"},
                           {color: "#ff8838"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#ff8838",
                           "#3874ff",
                           "#b3f0ff",
                           "#ffffff",
                           "#3918dc"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "snake*": {
-                        cells: [
+                  "snake*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#583262"},
                           {color: "#583262"},
                           {color: "#583262"},
@@ -8775,8 +8787,8 @@ class App extends React.Component {
                           {color: "#583262"},
                           {color: "#583262"},
                           {color: "#583262"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#583262",
                           "#3cb983",
                           "#74b93c",
@@ -8784,12 +8796,14 @@ class App extends React.Component {
                           "#000000",
                           "#651515",
                           "#eacf1f"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "dragon*": {
-                        cells: [
+                  "dragon*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#c983e2"},
                           {color: "#c983e2"},
                           {color: "#c983e2"},
@@ -9319,19 +9333,21 @@ class App extends React.Component {
                           {color: "#c983e2"},
                           {color: "#c983e2"},
                           {color: "#c983e2"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#c983e2",
                           "#d83131",
                           "#000000",
                           "#f06b05",
                           "#f0e005"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "horse*": {
-                        cells: [
+                  "horse*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#1a6641"},
                           {color: "#1a6641"},
                           {color: "#1a6641"},
@@ -9861,19 +9877,21 @@ class App extends React.Component {
                           {color: "#1a6641"},
                           {color: "#1a6641"},
                           {color: "#1a6641"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#1a6641",
                           "#694717",
                           "#e8aa54",
                           "#ffe3bd",
                           "#000000"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "monkey*": {
-                        cells: [
+                  "monkey*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#373649"},
                           {color: "#373649"},
                           {color: "#373649"},
@@ -10403,19 +10421,21 @@ class App extends React.Component {
                           {color: "#373649"},
                           {color: "#373649"},
                           {color: "#373649"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#373649",
                           "#4e1e04",
                           "#f3c17c",
                           "#ffa8fc",
                           "#000000"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "ox*" : {
-                        cells: [
+                  "ox*" : {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#f96c6c"},
                           {color: "#f96c6c"},
                           {color: "#f96c6c"},
@@ -10945,20 +10965,22 @@ class App extends React.Component {
                           {color: "#f96c6c"},
                           {color: "#f96c6c"},
                           {color: "#f96c6c"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#f96c6c",
                           "#a2a0a0",
                           "#91713b",
                           "#ffd68f",
                           "#000000",
                           "#ffadad"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "rabbit*": {
-                        cells: [
+                  "rabbit*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#1ecc3b"},
                           {color: "#1ecc3b"},
                           {color: "#1ecc3b"},
@@ -11488,19 +11510,21 @@ class App extends React.Component {
                           {color: "#1ecc3b"},
                           {color: "#1ecc3b"},
                           {color: "#1ecc3b"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#1ecc3b",
                           "#ffffff",
                           "#000000",
                           "#ffb3f2",
                           "#5d188b"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "tiger*": {
-                        cells: [
+                  "tiger*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#651f9e"},
                           {color: "#651f9e"},
                           {color: "#651f9e"},
@@ -12030,19 +12054,21 @@ class App extends React.Component {
                           {color: "#651f9e"},
                           {color: "#651f9e"},
                           {color: "#651f9e"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#651f9e",
                           "#000000",
                           "#f49b01",
                           "#f4daae",
                           "#ffb8f9"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "rat*": {
-                        cells: [
+                  "rat*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#61adff"},
                           {color: "#61adff"},
                           {color: "#61adff"},
@@ -12572,19 +12598,21 @@ class App extends React.Component {
                           {color: "#61adff"},
                           {color: "#61adff"},
                           {color: "#61adff"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#61adff",
                           "#999999",
                           "#000000",
                           "#ffb8f7",
                           "#d1b8ff"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "pig*": {
-                        cells: [
+                  "pig*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#1c5f3c"},
                           {color: "#1c5f3c"},
                           {color: "#1c5f3c"},
@@ -13114,19 +13142,21 @@ class App extends React.Component {
                           {color: "#1c5f3c"},
                           {color: "#1c5f3c"},
                           {color: "#1c5f3c"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#1c5f3c",
                           "#e458aa",
                           "#000000",
                           "#faadda",
                           "#ffffff"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "dog*": {
-                        cells: [
+                  "dog*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#507a33"},
                           {color: "#507a33"},
                           {color: "#507a33"},
@@ -13656,8 +13686,8 @@ class App extends React.Component {
                           {color: "#507a33"},
                           {color: "#507a33"},
                           {color: "#507a33"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#507a33",
                           "#412e07",
                           "#e3ba68",
@@ -13665,12 +13695,14 @@ class App extends React.Component {
                           "#f70202",
                           "#ffb3b3",
                           "#000000"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "rooster*": {
-                            cells: [
+                  "rooster*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                               {color: "#383c70"},
                               {color: "#383c70"},
                               {color: "#383c70"},
@@ -14200,19 +14232,21 @@ class App extends React.Component {
                               {color: "#383c70"},
                               {color: "#383c70"},
                               {color: "#383c70"}
-                            ],
-                            storedColors: [
+                    ],
+                    storedColors: [
                               "#383c70",
                               "#c60101",
                               "#ffffff",
                               "#ffa200",
                               "#000000"
-                            ],
-                    }
+                    ],
+                  }
                 },
                 {
-                    "sheep*": {
-                        cells: [
+                  "sheep*": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#8d5e5e"},
                           {color: "#8d5e5e"},
                           {color: "#8d5e5e"},
@@ -14742,19 +14776,21 @@ class App extends React.Component {
                           {color: "#8d5e5e"},
                           {color: "#8d5e5e"},
                           {color: "#8d5e5e"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#8d5e5e",
                           "#ffffff",
                           "#b5b5b5",
                           "#000000",
                           "#ffa3dd"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "bear": {
-                        cells: [
+                  "bear": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#4a3e74"},
                           {color: "#4a3e74"},
                           {color: "#4a3e74"},
@@ -15284,19 +15320,21 @@ class App extends React.Component {
                           {color: "#4a3e74"},
                           {color: "#4a3e74"},
                           {color: "#4a3e74"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#4a3e74",
                           "#000000",
                           "#ae6613",
                           "#613d0a",
                           "#ffc7f8"
-                        ],
-                      }
+                    ],
+                  }
                 },
                 {
-                    "peacock": {
-                        cells: [
+                  "peacock": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#6d2f83"},
                           {color: "#6d2f83"},
                           {color: "#6d2f83"},
@@ -15826,8 +15864,8 @@ class App extends React.Component {
                           {color: "#6d2f83"},
                           {color: "#6d2f83"},
                           {color: "#6d2f83"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#6d2f83",
                           "#255c7e",
                           "#257e3b",
@@ -15836,12 +15874,14 @@ class App extends React.Component {
                           "#d22eff",
                           "#2e46ff",
                           "#f1ff2e"
-                        ],
-                      }
+                    ],
+                  }
                 }, 
                 {
-                    "raccoon": {
-                        cells: [
+                  "raccoon": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#3b8ee8"},
                           {color: "#3b8ee8"},
                           {color: "#3b8ee8"},
@@ -16371,20 +16411,22 @@ class App extends React.Component {
                           {color: "#3b8ee8"},
                           {color: "#3b8ee8"},
                           {color: "#3b8ee8"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#3b8ee8",
                           "#696969",
                           "#000000",
                           "#ffffff",
                           "#5ad8d6",
                           "#f4d6f5"
-                        ],
-                    }
+                    ],
+                  }
                 }, 
                 {
-                    "calico": {
-                        cells: [
+                  "calico": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#908823"},
                           {color: "#908823"},
                           {color: "#908823"},
@@ -16914,8 +16956,8 @@ class App extends React.Component {
                           {color: "#908823"},
                           {color: "#908823"},
                           {color: "#908823"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#908823",
                           "#f91515",
                           "#7a1515",
@@ -16925,12 +16967,14 @@ class App extends React.Component {
                           "#ffffff",
                           "#171b97",
                           "#ff6c0a"
-                        ],
-                      }
+                    ],
+                  }
                 }, 
                 {
-                    "zebra - skinny": {
-                        cells: [
+                  "zebra - skinny": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#1a6641"},
                           {color: "#1a6641"},
                           {color: "#1a6641"},
@@ -17460,8 +17504,8 @@ class App extends React.Component {
                           {color: "#1a6641"},
                           {color: "#1a6641"},
                           {color: "#1a6641"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#1a6641",
                           "#694717",
                           "#e8aa54",
@@ -17470,11 +17514,14 @@ class App extends React.Component {
                           "#ffffff",
                           "#83ccce",
                           "#fec7ff"
-                        ],
-                      } 
-                }, {
-                    "zebra - wide": {
-                        cells: [
+                    ],
+                  } 
+                }, 
+                {
+                  "zebra - wide": {
+                    rows: 23,
+                    columns: 23,
+                    cells: [
                           {color: "#1a6641"},
                           {color: "#1a6641"},
                           {color: "#1a6641"},
@@ -18004,8 +18051,8 @@ class App extends React.Component {
                           {color: "#1a6641"},
                           {color: "#1a6641"},
                           {color: "#1a6641"}
-                        ],
-                        storedColors: [
+                    ],
+                    storedColors: [
                           "#1a6641",
                           "#694717",
                           "#e8aa54",
@@ -18013,119 +18060,80 @@ class App extends React.Component {
                           "#000000",
                           "#ffffff",
                           "#f5c2ff"
-                        ],
-                      }
+                    ],
+                  }
                 }
-            ],
-            name: "",
-            showLayout: true,
-            showColors: true,
+          ]
         }
+      }
 
-        this.handleRowChange = this.handleRowChange.bind(this);
-        this.handleColChange = this.handleColChange.bind(this);
-        this.handleColorInputChange = this.handleColorInputChange.bind(this);
-        this.updateGrid = this.updateGrid.bind(this);
-        this.changeCellColor = this.changeCellColor.bind(this);
-        this.applyToAll = this.applyToAll.bind(this);
-        this.storeColor = this.storeColor.bind(this);
-        this.setColor = this.setColor.bind(this);
-        this.addImage = this.addImage.bind(this);
-        this.addName = this.addName.bind(this);
-        this.applyStoredImage = this.applyStoredImage.bind(this);
-        this.updateColor = this.updateColor.bind(this);
-        this.minimizeLayout = this.minimizeLayout.bind(this);
-        this.minimizeColors = this.minimizeColors.bind(this);
+  updateGrid = (param) => {
+    let color = this.state.color || "#fff";
+    let rows = this.state.rows;
+    let columns = this.state.columns;
+    if (param) {
+      switch(Object.keys(param)[0]) {
+        case "color":
+          color = Object.values(param)[0];
+          break;
+        case "rows":
+          rows = Object.values(param)[0];
+          break;
+        case "columns":
+          columns = Object.values(param)[0];
+          break;
+        default:
+          break;
+      }
     }
 
-    updateGrid(param) {
-        let color = this.state.color || "#fff";
-        let rows = this.state.rows;
-        let columns = this.state.columns;
-        if (param) {
-            switch(Object.keys(param)[0]) {
-                case "color":
-                    color = Object.values(param)[0];
-                    break;
-                case "rows":
-                    rows = Object.values(param)[0];
-                    break;
-                case "columns":
-                    columns = Object.values(param)[0];
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        let grid = [];
-        for (let i=0; i < rows; i++) {
-            for (let j=0; j < columns; j++) {
-                grid.push({ color: color });
-            }
-        }
-        this.setState({ cells: grid })
+    let grid = [];
+    for (let i=0; i < rows; i++) {
+      for (let j=0; j < columns; j++) {
+        grid.push({ color: color });
+      }
     }
+    this.setState({ cells: grid })
+  }
 
-    componentDidMount() {
-        this.updateGrid();
-    }
+  componentDidMount = () => {
+    this.updateGrid();
+  }
 
-    handleRowChange(event) {
-        this.setState({ rows: parseInt(event.target.value) });
-        this.updateGrid({ "rows": parseInt(event.target.value) });
-    }
+  handleRowOrColChange = (event) => {
+   const {name, value} = event.target;
+   this.setState({ [name]: parseInt(value) });
+   this.updateGrid({ [name]: parseInt(value) });
+  }
 
-    handleColChange(event) {
-        this.setState({ columns: parseInt(event.target.value) });
-        this.updateGrid({ "columns": parseInt(event.target.value) });
-    }
+  handleColorInputChange = (event) => {
+    this.setState({ selectedColor: event.target.value })
+  }
 
-    handleColorInputChange(event) {
-        this.setState({ selectedColor: event.target.value })
-    }
+  changeCellColor = (i) => {
+    let cells = [...this.state.cells];
+    let changedCell = {...cells[i]};
+    changedCell.color = this.state.selectedColor;
+    cells[i] = changedCell;
+    this.setState({ cells: cells })
+  }
 
-    changeCellColor(i) {
-        let cells = [...this.state.cells];
-        let changedCell = {...cells[i]};
-        changedCell.color = this.state.selectedColor;
-        cells[i] = changedCell;
-        this.setState({ cells: cells })
-    }
+  applyToAll = (color) => {
+    this.updateGrid({ "color": color });
+  }
 
-    applyToAll(color) {
-        this.updateGrid({ "color": color });
-    }
+  storeColor = () => {
+    const selectedColor = this.state.selectedColor;
+    let listOfStored = [...this.state.storedColors];
+    listOfStored = listOfStored.concat(selectedColor);
+    this.setState({ storedColors: listOfStored })
+  }
 
-    storeColor() {
-        const selectedColor = this.state.selectedColor;
-        let listOfStored = [...this.state.storedColors];
-        listOfStored = listOfStored.concat(selectedColor);
-        this.setState({ storedColors: listOfStored })
-    }
+  setColor = (color) => {
+    this.setState({ selectedColor: color })
+  }
 
-    setColor(color) {
-        this.setState({ selectedColor: color })
-    }
-
-    addName(event) {
-        this.setState({ name: event.target.value })
-    }
-
-    addImage() {
-        if (this.state.name) {
-            let images = [...this.state.storedImages];
-            const name = this.state.name;
-            const cells = this.state.cells;
-            const colors = this.state.storedColors
-            let newImage = {}
-            newImage[name] = {cells: cells, storedColors: colors};
-            images = images.concat(newImage);
-            this.setState({ storedImages: images });
-        }
-    }
-
-    applyStoredImage(event) {
+    applyStoredImage = (event) => {
         const animal = Object.values(this.state.storedImages.filter((image) => {
             return Object.keys(image)[0] === event.target.value;
         })[0])[0];
@@ -18135,128 +18143,137 @@ class App extends React.Component {
         this.setState({ cells: cells, storedColors: storedColors, rows: rows, columns: columns })
     }
 
-    minimizeLayout() {
-        this.setState({ showLayout: !this.state.showLayout })
+    addName = (event) => {
+      this.setState({ name: event.target.value })
     }
 
-    minimizeColors() {
-        this.setState({ showColors: !this.state.showColors })
+  addImage = () => {
+    if (this.state.name) {
+      let images = [...this.state.storedImages];
+      const name = this.state.name;
+      const cells = this.state.cells;
+      const colors = this.state.storedColors
+      let newImage = {}
+      newImage[name] = {cells: cells, storedColors: colors};
+      images = images.concat(newImage);
+      this.setState({ storedImages: images });
     }
+  }
 
-    updateColor(color) {
-        // incoming color is the stored color
-        // take state color
-        // in storedColors list, replace color param with state color
-        // in grid, if color has color param, replace with state color
-        const newColor = this.state.selectedColor;
-        let cells = this.state.cells;
-        cells.forEach(function(cell) {
-            if (cell.color === color) {
-                cell.color = newColor;
-            }
-        })
+  minimizeLayout = () => {
+    this.setState({ showLayout: !this.state.showLayout })
+  }
 
-        let storedColors = this.state.storedColors;
-        const index = storedColors.indexOf(color);
-        if (index > -1) {
-            storedColors[index] = newColor
-        }
+  minimizeColors = () => {
+    this.setState({ showColors: !this.state.showColors })
+  }
 
-        this.setState({ cells: cells, storedColors: storedColors })
-    }
 
-    render() {
-        return (
-            <div className="App">
-                <h1>C2C blanket guide</h1>
-                <p>Create custom corner-to-corner blankets based on ChiWei's <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">"zoodiac" afghan</a>. Create your own pattern, or modify one from the library.</p>
-                <div className="content">
-                    <div>
-                        {/* Colors */}
-                        <div className="flex">
-                            <div className="inputs">
-                                <h2>Colors 
-                                    {/* <button onClick={this.minimizeColors}>Minimize</button> */}
-                                </h2>
-                                <div className="color-picker flex">
-                                    <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
-                                    <label htmlFor="color">Pick a color</label>
-                                </div>
-                                <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
-                                <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
-                                <button onClick={this.storeColor}>Add to color palette</button>
-                            </div>
+  updateColor = (color) => {
+   // incoming color is the stored color
+   // take state color
+   // in storedColors list, replace color param with state color
+   // in grid, if color has color param, replace with state color
+   const newColor = this.state.selectedColor;
+   let cells = this.state.cells;
+   cells.forEach(function(cell) {
+     if (cell.color === color) {
+       cell.color = newColor;
+     }
+   })
 
-                            {this.state.storedColors.length > 0 ? 
-                                <div>
-                                    <h2>Color Palette</h2>
-                                    <ul className="color-palette">
-                                        {this.state.storedColors.map((color, index) => 
-                                            <li className="color-palette__item" key={index}>
-                                                Color {index + 1}
-                                                <span className="swatch" style={{ backgroundColor: color }} ></span>
-                                                <button onClick={() => this.setColor(color)}>Use this color</button>
-                                                <button onClick={() => this.updateColor(color)}>Update this color</button>
-                                            </li>
-                                        )}
-                                    </ul>
-                                </div>
-                                :
-                                ""
-                            }
-                        </div>
+   let storedColors = this.state.storedColors;
+   const index = storedColors.indexOf(color);
+   if (index > -1) {
+     storedColors[index] = newColor
+   }
 
-                        
-                    {/* Library */}
-                        <div>
-                            <h2>Library</h2>
-                            <p>Animals with a star denote animals originally from ChiWei's pattern</p>
-                            <select className="" onChange={this.applyStoredImage}>
-                                <option value="">Choose an animal</option>
-                                {this.state.storedImages.sort(function(a, b) {
-                                    if(Object.keys(a)[0] < Object.keys(b)[0]) { return -1 };
-                                    if(Object.keys(a)[0] > Object.keys(b)[0]) { return 1 };
-                                    return 0;
-                                }).map((image, index) => 
-                                    <option key={index} value={Object.keys(image)[0]}>{Object.keys(image)[0]}</option>
-                                )}
-                            </select>
-                        </div>
+   this.setState({ cells: cells, storedColors: storedColors })
+  }
 
-                        {/* Layout */}
-                        <div>
-                            <h2>Layout
-                                {/* <button onClick={this.minimizeLayout}>Minimize</button> */}
-                            </h2>
-                            {this.state.showLayout ? 
-                                <div className="inputs">
-                                    <label htmlFor="rows">How many rows?</label>
-                                    <input id="rows" type="number" value={this.state.rows} onChange={this.handleRowChange}></input>
-                                    <label htmlFor="columns">How many columns?</label>
-                                    <input id="columns" type="number" value={this.state.columns} onChange={this.handleColChange}></input>
-                                </div>
-                                : ""
-                            }
-                        </div>
-
-                        {/* Storage */}
-                        <div className="inputs">
-                            <h2>Storage</h2>
-                            <label htmlFor="name">Name your image</label>
-                            <input id="name" type="text" onChange={this.addName}></input>
-                            <button onClick={this.addImage}>Add image</button>
-                        </div>
-                    </div>
-
-                    <div className="grid" style={{"--rows": this.state.rows, "--cols": this.state.columns}}>
-                        {this.state.cells.map((item, index) => 
-                            <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>
-                        )}
+  render = () => {
+    return (
+      <div className="App">
+        <h1>C2C blanket guide</h1>
+        <p>Create custom corner-to-corner blankets based on ChiWei's <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">"zoodiac" afghan</a>. Create your own pattern, or modify one from the library.</p>
+        <div className="content">
+          <div>
+            {/* Colors */}
+            <div className="flex">
+              <div className="inputs">
+                <h2>Colors 
+                  {/* <button onClick={this.minimizeColors}>Minimize</button> */}
+                </h2>
+                <div className="color-picker flex">
+                  <input id="color" type="color" value={this.state.selectedColor} onChange={this.handleColorInputChange}></input>
+                  <label htmlFor="color">Pick a color</label>
                 </div>
+                <button onClick={() => this.applyToAll("#fff")}>Clear whole grid</button>
+                <button onClick={() => this.applyToAll(this.state.selectedColor)}>Apply color to whole grid</button>
+                <button onClick={this.storeColor}>Add to color palette</button>
+              </div>
+
+              {this.state.storedColors.length &&
+                <div>
+                  <h2>Color Palette</h2>
+                  <ColorPalette
+                    updateColor={this.updateColor}
+                    setColor={this.setColor}
+                    storedColors={this.state.storedColors}
+                  ></ColorPalette>
+                </div>}
             </div>
+
+            
+          {/* Library */}
+            <div>
+              <h2>Library</h2>
+              <p>Animals with a star denote animals originally from ChiWei's pattern</p>
+              <select className="" onChange={this.applyStoredImage}>
+                <option value="">Choose an animal</option>
+                {this.state.storedImages.sort(function(a, b) {
+                  if(Object.keys(a)[0] < Object.keys(b)[0]) { return -1 };
+                  if(Object.keys(a)[0] > Object.keys(b)[0]) { return 1 };
+                  return 0;
+                }).map((image, index) => 
+                  <option key={index} value={Object.keys(image)[0]}>{Object.keys(image)[0]}</option>
+                )}
+              </select>
             </div>
-        );
-    }
+
+            {/* Layout */}
+            <div>
+              <h2>Layout
+                {/* <button onClick={this.minimizeLayout}>Minimize</button> */}
+              </h2>
+              {/* {this.state.showLayout &&  */}
+                <div className="inputs">
+                  <label htmlFor="rows">How many rows?</label>
+                  <input id="rows" name="rows" type="number" value={this.state.rows} onChange={this.handleRowOrColChange}></input>
+                  <label htmlFor="columns">How many columns?</label>
+                  <input id="columns" name="columns" type="number" value={this.state.columns} onChange={this.handleRowOrColChange}></input>
+                </div>
+              {/* } */}
+            </div>
+
+            {/* Storage */}
+            <div className="inputs">
+              <h2>Storage</h2>
+              <label htmlFor="name">Name your image</label>
+              <input id="name" type="text" onChange={this.addName}></input>
+              <button onClick={this.addImage}>Add image</button>
+            </div>
+          </div>
+
+          <div className="grid" style={{"--rows": this.state.rows, "--cols": this.state.columns}}>
+            {this.state.cells.map((item, index) => 
+              <span className="cell" key={index} style={{ backgroundColor: item.color }} onClick={() => this.changeCellColor(index)}></span>
+            )}
+        </div>
+      </div>
+      </div>
+    );
+  }
 }
 
 export default App;

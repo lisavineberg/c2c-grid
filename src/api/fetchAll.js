@@ -13,7 +13,10 @@ const fetchAll = () => client.query(
       return q.Get(ref)
     })
     // query the refs
-    return client.query(getAllProductDataQuery).then((data) => data)
+    return client.query(getAllProductDataQuery).then((data) => {
+      const mappedData = data.map(item => item.data.grid);
+      return mappedData;
+    })
   })
   .catch(error => console.warn('error', error.message))
 

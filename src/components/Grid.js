@@ -1,0 +1,24 @@
+import React from "react";
+import styled from "styled-components";
+
+import Cell from "./Cell";
+
+const StyledGrid = styled.div`
+  display: grid;
+  flex: 1 0 100%;
+  grid-template-columns: repeat(${props => props.cols}, 20px);
+  grid-template-rows: repeat(${props => props.rows}, 20px);
+  margin-top: 20px;
+`;
+
+const Grid = ({ cells, rows, cols }) => {
+  return (
+    <StyledGrid rows={rows} cols={cols}>
+      {cells.map((el, index) => {
+        return <Cell key={index} color={el.color} index={index} />
+      })}
+    </StyledGrid>
+  )
+}
+
+export default Grid;

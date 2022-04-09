@@ -3,17 +3,6 @@
     src: local('OpenSans-Regular'), url('./fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
 }
 
-.App {
-    padding: 40px;
-    font-family: 'Open Sans';
-}
-
-.content {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 10px;
-}
-
 button {
     background-color: white;
     border: 1px solid black;
@@ -32,18 +21,6 @@ button:hover {
     display: flex;
 }
 
-.grid {
-    flex: 1 0 100%;
-    display: grid;
-    grid-template-columns: repeat(var(--cols), 20px);
-    grid-template-rows: repeat(var(--rows), 20px);
-    margin-top: 20px;
-}
-
-.cell {
-    outline: 1px solid black;
-}
-
 .inputs {
     display: flex;
     flex-direction: column;
@@ -59,19 +36,6 @@ input {
     width: 200px;
 }
 
-.color-palette {
-    padding: 0;
-}
-
-.color-palette__item {
-    align-items: center;
-    display: flex;
-    margin-bottom: 4px;
-}
-
-.color-palette__item button {
-    margin-right: 10px;
-}
 
 .swatch {
     border: 1px solid black;
@@ -79,14 +43,4 @@ input {
     height: 20px;
     margin: 0 10px;
     width: 20px;
-}
-
-input[type="color"] {
-    margin-bottom: 0;
-    margin-right: 5px;
-    width: 30px;
-}
-
-.color-picker {
-    margin-bottom: 20px;
 }

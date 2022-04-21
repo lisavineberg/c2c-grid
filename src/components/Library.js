@@ -12,10 +12,8 @@ const Library = ({ storedImages, applyImage }) => {
       <p>Animals with a star denote animals originally from ChiWei's pattern</p>
       <select onChange={applyStoredImage}>
         <option value="">Choose an animal</option>
-        {storedImages.sort(function(a, b) {
-          return a.name > b.name
-        }).map((image, index) => 
-          <option key={`library-option-${index}`} value={image.name}>{image.name}</option>
+        {storedImages.map(item => item.name).sort().map((image, index) => 
+          <option key={`library-option-${index}`} value={image}>{image}</option>
         )}
       </select>
     </div>

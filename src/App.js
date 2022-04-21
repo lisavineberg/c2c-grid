@@ -32,7 +32,7 @@ const App = () => {
   const [selectedColor, setSelectedColor] = useState("#fff");
   const [cells, setCells] = useState([]);
   const [storedColors, setStoredColors] = useState([]);
-  const [storedImages, setStoredImages] = useState([]);
+  const [storedImages, setStoredImages] = useState(IMAGES);
 
   useEffect(() => {
     const grid = [];

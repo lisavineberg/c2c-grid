@@ -53,8 +53,8 @@ const ColorSelector = ({ storedColors, setStoredColors }) => {
         <ColorPicker id="color-picker" type="color" value={selectedColor} onChange={handleChange} />
         <label htmlFor="color-picker">Pick a color</label>
       </ColorPickerContainer>
-      {/* <button onClick={() => applyToAll("#fff")}>Clear whole grid</button> */}
-      {/* <button onClick={() => applyToAll(selectedColor)}>Apply color to whole grid</button> */}
+      <button onClick={() => applyToAll("#fff")}>Clear whole grid</button>
+      <button onClick={() => applyToAll(selectedColor)}>Apply color to whole grid</button>
       <button onClick={storeColor}>Add to color palette</button>
     </Container>
   )

@@ -7,6 +7,7 @@ import Library from "./components/Library";
 import Layout from "./components/Layout";
 import Storage from "./components/Storage";
 import Grid from "./components/Grid";
+import IMAGES from "./Images";
 
 const StyledApp = styled.div`
   font-family: "Open Sans";
@@ -27,23 +28,26 @@ const App = () => {
   const [selectedColor, setSelectedColor] = useState("#fff");
   const [cells, setCells] = useState([]);
   const [storedColors, setStoredColors] = useState([]);
-  const [storedImages, setStoredImages] = useState([]);
+  const [storedImages, setStoredImages] = useState(IMAGES);
 
-  const updateGrid = (param) => {
-    const color = selectedColor;
+  useEffect(() => {
     const grid = [];
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < columns; col++) {
-        grid.push({ color: color});
+        grid.push({ color: "#fff"});
       }
     }
 
     setCells(grid);
-  };
-
-  useEffect(() => {
-    updateGrid();
   }, []);
+
+  const applyStoredImage = (animal) => {
+    const info = storedImages.find(image => image.name === animal)
+    setRows(info.rows || 23);
+    setColumns(info.columns || 23);
+    setStoredColors(info.storedColors);
+    setCells(info.cells);
+  }
 
   return (
     <GeneralContext.Provider value={{ cells, setCells, selectedColor, setSelectedColor }}>
@@ -52,8 +56,8 @@ const App = () => {
         <p>Create custom corner-to-corner blankets based on ChiWei's <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">"zoodiac" afghan</a>. Create your own pattern, or modify one from the library.</p>
         <Content>
           <ColorSelector storedColors={storedColors} setStoredColors={setStoredColors} />
-          {storedColors && <ColorPalette storedColors={storedColors} />}
-          <Library storedImages={storedImages} />
+          {storedColors && <ColorPalette storedColors={storedColors} setStored={setStoredColors} />}
+          <Library storedImages={storedImages} applyImage={applyStoredImage} />
           <Layout rows={rows} cols={columns} />
           <Grid cells={cells} rows={rows} cols={columns} />
           <Storage />

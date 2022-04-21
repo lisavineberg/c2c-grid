@@ -20,6 +20,10 @@ const Content = styled.div`
   column-gap: 10px;
 `;
 
+const Flex = styled.div`
+  display: flex;
+`;
+
 export const GeneralContext = createContext();
 
 const App = () => {
@@ -28,7 +32,7 @@ const App = () => {
   const [selectedColor, setSelectedColor] = useState("#fff");
   const [cells, setCells] = useState([]);
   const [storedColors, setStoredColors] = useState([]);
-  const [storedImages, setStoredImages] = useState(IMAGES);
+  const [storedImages, setStoredImages] = useState([]);
 
   useEffect(() => {
     const grid = [];
@@ -39,7 +43,11 @@ const App = () => {
     }
 
     setCells(grid);
-  }, []);
+  }, [rows, columns]);
+
+  // useEffect(() => {
+  //   setStoredImages(IMAGES);
+  // }, [storedImages]);
 
   const applyStoredImage = (animal) => {
     const info = storedImages.find(image => image.name === animal)
@@ -49,18 +57,26 @@ const App = () => {
     setCells(info.cells);
   }
 
+  const handleRowOrColChange = (name, value) => {
+    name === "rows" ? setRows(value) : setColumns(value);
+  }
+
   return (
     <GeneralContext.Provider value={{ cells, setCells, selectedColor, setSelectedColor }}>
       <StyledApp>
         <h1>C2C blanket guide</h1>
         <p>Create custom corner-to-corner blankets based on ChiWei's <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">"zoodiac" afghan</a>. Create your own pattern, or modify one from the library.</p>
         <Content>
-          <ColorSelector storedColors={storedColors} setStoredColors={setStoredColors} />
-          {storedColors && <ColorPalette storedColors={storedColors} setStored={setStoredColors} />}
-          <Library storedImages={storedImages} applyImage={applyStoredImage} />
-          <Layout rows={rows} cols={columns} />
+          <div>
+            <Flex>
+              <ColorSelector storedColors={storedColors} setStoredColors={setStoredColors} />
+              {storedColors && <ColorPalette storedColors={storedColors} setStored={setStoredColors} />}
+            </Flex>
+            <Library storedImages={storedImages} applyImage={applyStoredImage} />
+            <Layout rows={rows} cols={columns} handleChange={handleRowOrColChange} />
+            <Storage storedImages={storedImages} storeImage={setStoredImages} storedColors={storedColors} rows={rows} columns={columns} />
+          </div>
           <Grid cells={cells} rows={rows} cols={columns} />
-          <Storage />
         </Content>
       </StyledApp>
     </GeneralContext.Provider>

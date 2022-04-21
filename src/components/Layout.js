@@ -7,12 +7,15 @@ const Container = styled.div`
   margin-right: 20px;
 `;
 
-const Layout = ({ rows, cols }) => {
+const Input = styled.input`
+  margin-bottom: 20px;
+`;
+
+const Layout = ({ rows, cols, handleChange }) => {
 
   const handleRowOrColChange = (event) => {
-    // const {name, value} = event.target;
-    // this.setState({ [name]: parseInt(value) });
-    // this.updateGrid({ [name]: parseInt(value) });
+    const { name, value} = event.target;
+    handleChange(name, parseInt(value));
   }
 
   return (
@@ -23,9 +26,9 @@ const Layout = ({ rows, cols }) => {
       {/* {this.state.showLayout &&  */}
         <Container>
           <label htmlFor="rows">How many rows?</label>
-          <input id="rows" name="rows" type="number" value={rows} onChange={handleRowOrColChange} />
+          <Input id="rows" name="rows" type="number" value={rows} onChange={handleRowOrColChange} />
           <label htmlFor="columns">How many columns?</label>
-          <input id="columns" name="columns" type="number" value={cols} onChange={handleRowOrColChange} />
+          <Input id="columns" name="columns" type="number" value={cols} onChange={handleRowOrColChange} />
         </Container>
       {/* } */}
     </div>

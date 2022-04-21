@@ -24,6 +24,21 @@ const ColorPicker = styled.input`
   width: 30px;
 `;
 
+const Button = styled.button`
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  font-family: 'Open Sans';
+  max-width: 200px;
+  padding: 5px;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+`;
+
 const ColorSelector = ({ storedColors, setStoredColors }) => {
   const { cells, setCells, selectedColor, setSelectedColor } = useContext(GeneralContext);
 
@@ -53,9 +68,9 @@ const ColorSelector = ({ storedColors, setStoredColors }) => {
         <ColorPicker id="color-picker" type="color" value={selectedColor} onChange={handleChange} />
         <label htmlFor="color-picker">Pick a color</label>
       </ColorPickerContainer>
-      <button onClick={() => applyToAll("#fff")}>Clear whole grid</button>
-      <button onClick={() => applyToAll(selectedColor)}>Apply color to whole grid</button>
-      <button onClick={storeColor}>Add to color palette</button>
+      <Button onClick={() => applyToAll("#fff")}>Clear whole grid</Button>
+      <Button onClick={() => applyToAll(selectedColor)}>Apply color to whole grid</Button>
+      <Button onClick={storeColor}>Add to color palette</Button>
     </Container>
   )
 }

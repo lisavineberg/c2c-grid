@@ -26,24 +26,42 @@ const Swatch = styled.span`
   width: 20px;
 `;
 
+const Button = styled.button`
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  font-family: 'Open Sans';
+  max-width: 200px;
+  padding: 5px;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+`;
+
 const ColorPalette = ({ storedColors, setStored }) => {
   const { cells, setCells, selectedColor, setSelectedColor } = useContext(GeneralContext);
 
-  // const updateColor = (color) => {
-  //   const newColor = selectedColor;
-  //   const newCells = cells.forEach(cell => {
-  //     if (cell.color === color) {
-  //       cell.color = newColor;
-  //     }
-  //   })
-  //   setCells(newCells);
+  const updateColor = (color) => {
+    const newColor = selectedColor;
+    const newCells = cells.map(cell => {
+      if (cell.color === color) {
+        cell.color = newColor;
+      }
+      return cell;
+    })
+    setCells(newCells);
 
-  //   const index = storedColors.indexOf(color);
-  //   if (index > -1) {
-  //     storedColors[index] = newColor;
-  //     // setStored(storedColors);
-  //   }
-  // }
+    const newStoredColors = storedColors.map(item => {
+      if (item === color) {
+        item = selectedColor;
+      }
+      return item;
+    })
+    setStored(newStoredColors);
+  }
 
   return (
     <div>
@@ -53,8 +71,8 @@ const ColorPalette = ({ storedColors, setStored }) => {
             <ColorPaletteItem key={`color-palette-${index}`}>
               Color {index + 1}
               <Swatch bgColor={color} />
-              <button onClick={() => setSelectedColor(color)}>Use this color</button>
-              {/* <button onClick={() => updateColor(color)}>Update this color</button> */}
+              <Button onClick={() => setSelectedColor(color)}>Use this color</Button>
+              <Button onClick={() => updateColor(color)}>Update this color</Button>
             </ColorPaletteItem>
         )}
       </StyledColorPalette>

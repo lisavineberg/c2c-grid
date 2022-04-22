@@ -14,7 +14,7 @@ const Cell = ({ index }) => {
 
   useEffect(() => {
     setCellColor(cells[index].color);
-  }, [cells]);
+  }, [cells, index]);
 
   const changeCellColor = () => {
     setCellColor(selectedColor);

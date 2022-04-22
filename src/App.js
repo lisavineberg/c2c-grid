@@ -35,15 +35,19 @@ const App = () => {
   const [storedImages, setStoredImages] = useState(IMAGES);
 
   useEffect(() => {
-    const grid = [];
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < columns; col++) {
-        grid.push({ color: "#fff"});
+    let grid = [];
+    if (!cells.length) {
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < columns; col++) {
+          grid.push({ color: "#fff"});
+        }
       }
+    } else {
+      grid = cells;
     }
 
     setCells(grid);
-  }, [rows, columns]);
+  }, [rows, columns, cells]);
 
   // useEffect(() => {
   //   setStoredImages(IMAGES);
@@ -51,10 +55,10 @@ const App = () => {
 
   const applyStoredImage = (animal) => {
     const info = storedImages.find(image => image.name === animal)
-    setRows(info.rows || 23);
-    setColumns(info.columns || 23);
     setStoredColors(info.storedColors);
     setCells(info.cells);
+    setRows(info.rows);
+    setColumns(info.columns);
   }
 
   const handleRowOrColChange = (name, value) => {

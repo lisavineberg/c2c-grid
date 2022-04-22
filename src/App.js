@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import styled from "styled-components";
 
 import ColorSelector from "./components/ColorSelector";
@@ -7,7 +7,7 @@ import Library from "./components/Library";
 import Layout from "./components/Layout";
 import Storage from "./components/Storage";
 import Grid from "./components/Grid";
-import IMAGES from "./Images";
+import { fetchAll } from './api';
 
 const StyledApp = styled.div`
   font-family: "Open Sans";
@@ -32,7 +32,7 @@ const App = () => {
   const [selectedColor, setSelectedColor] = useState("#fff");
   const [cells, setCells] = useState([]);
   const [storedColors, setStoredColors] = useState([]);
-  const [storedImages, setStoredImages] = useState(IMAGES);
+  const [storedImages, setStoredImages] = useState([]);
 
   useEffect(() => {
     let grid = [];
@@ -49,13 +49,16 @@ const App = () => {
     setCells(grid);
   }, [rows, columns, cells]);
 
-  // useEffect(() => {
-  //   setStoredImages(IMAGES);
-  // }, [storedImages]);
+  useEffect(() => {
+    fetchAll().then(resp => {
+      setStoredImages(resp);
+
+    });
+  }, []);
 
   const applyStoredImage = (animal) => {
     const info = storedImages.find(image => image.name === animal)
-    setStoredColors(info.storedColors);
+    setStoredColors(info.storedColors || info.colors);
     setCells(info.cells);
     setRows(info.rows);
     setColumns(info.columns);

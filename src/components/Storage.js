@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
 import { GeneralContext } from "./../App";
+import { create } from './../api';
 
 const Container = styled.div`
   display: flex;
@@ -32,8 +33,8 @@ const Input = styled.input`
   margin-bottom: 20px;
 `;
 
-const Storage = ({ storedImages, storeImage, storedColors, rows, columns }) => {
-  const { cells, setCells } = useContext(GeneralContext);
+const Storage = ({ storedColors, rows, columns }) => {
+  const { cells } = useContext(GeneralContext);
 
   const [name, setName] = useState("");
   const addName = (event) => {
@@ -42,19 +43,14 @@ const Storage = ({ storedImages, storeImage, storedColors, rows, columns }) => {
 
   const addImage = () => {
     if (name) {
-      // TODO
-      // const images = storedImages;
-      // const newImage = {
-      //   name: name, 
-      //   cells: cells, 
-      //   storedColors: storedColors,
-      //   rows: rows,
-      //   columns: columns,
-      // }
-      // console.log("new image", newImage);
-      // images.push(newImage)
-      // console.log("images", images);
-      // storeImage(images);
+      const grid = {
+        name,
+        cells,
+        storedColors,
+        rows,
+        columns
+      }
+      create(grid);
     }
   }
 

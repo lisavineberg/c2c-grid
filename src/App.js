@@ -34,6 +34,9 @@ const App = () => {
   const [storedColors, setStoredColors] = useState([]);
   const [storedImages, setStoredImages] = useState([]);
 
+  const [showVerticalCenter, setShowVerticalCenter] = useState(false);
+  const [showHorizontalCenter, setShowHorizontalCenter] = useState(false);
+
   useEffect(() => {
     let grid = [];
     if (!cells.length) {
@@ -68,8 +71,13 @@ const App = () => {
     name === "rows" ? setRows(value) : setColumns(value);
   }
 
+  const showGridline = () => {
+    setShowVerticalCenter(!showVerticalCenter);
+    setShowHorizontalCenter(!showHorizontalCenter)
+  }
+
   return (
-    <GeneralContext.Provider value={{ cells, setCells, selectedColor, setSelectedColor }}>
+    <GeneralContext.Provider value={{ cells, setCells, selectedColor, setSelectedColor, rows, columns }}>
       <StyledApp>
         <h1>C2C blanket guide</h1>
         <p>Create custom corner-to-corner blankets based on ChiWei's <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">"zoodiac" afghan</a>. Create your own pattern, or modify one from the library.</p>
@@ -79,11 +87,12 @@ const App = () => {
               <ColorSelector storedColors={storedColors} setStoredColors={setStoredColors} />
               {storedColors && <ColorPalette storedColors={storedColors} setStored={setStoredColors} />}
             </Flex>
+            <button onClick={showGridline}>Show grid lines</button>
             <Library storedImages={storedImages} applyImage={applyStoredImage} />
             <Layout rows={rows} cols={columns} handleChange={handleRowOrColChange} />
             <Storage storedImages={storedImages} storeImage={setStoredImages} storedColors={storedColors} rows={rows} columns={columns} />
           </div>
-          <Grid cells={cells} rows={rows} cols={columns} />
+          <Grid cells={cells} rows={rows} cols={columns} showVerticalCenter={showVerticalCenter} showHorizontalCenter={showHorizontalCenter} />
         </Content>
       </StyledApp>
     </GeneralContext.Provider>

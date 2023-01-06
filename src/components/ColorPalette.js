@@ -63,13 +63,17 @@ const ColorPalette = ({ storedColors, setStored }) => {
     setStored(newStoredColors);
   }
 
+  const calculateCount = (color) => {
+    return cells.filter(cell => cell.color === color).length
+  }
+
   return (
     <div>
       <h2>Color Palette</h2>
       <StyledColorPalette>
         {storedColors.map((color, index) => 
             <ColorPaletteItem key={`color-palette-${index}`}>
-              Color {index + 1}
+              Color {index + 1} ({calculateCount(color)})
               <Swatch bgColor={color} />
               <Button onClick={() => setSelectedColor(color)}>Use this color</Button>
               <Button onClick={() => updateColor(color)}>Update this color</Button>

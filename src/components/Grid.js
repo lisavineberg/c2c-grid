@@ -11,11 +11,11 @@ const StyledGrid = styled.div`
   margin-top: 20px;
 `;
 
-const Grid = ({ cells, rows, cols }) => {
+const Grid = ({ cells, rows, cols, showVerticalCenter, showHorizontalCenter }) => {
   return (
     <StyledGrid rows={rows} cols={cols}>
       {cells.map((el, index) => {
-        return <Cell key={index} color={el.color} index={index} />
+        return <Cell key={index} color={el.color} index={index} showVerticalCenter={showVerticalCenter} showHorizontalCenter={showHorizontalCenter} />
       })}
     </StyledGrid>
   )

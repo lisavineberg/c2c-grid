@@ -1,7 +1,12 @@
 import React from "react";
 
-const Library = ({ storedImages, applyImage }) => {
-  const applyStoredImage = (event) => {
+interface LibraryProps {
+  storedImages: { name: string }[];
+  applyImage: (image: string) => void;
+}
+
+const Library: React.FC<LibraryProps> = ({ storedImages, applyImage }) => {
+  const applyStoredImage = (event: React.ChangeEvent<HTMLSelectElement>) => {
     applyImage(event.target.value);
   };
 

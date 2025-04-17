@@ -1,18 +1,29 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 
-import { GeneralContext } from "./../App";
+import { GeneralContext, useGeneralContext } from "../App";
 
 const StyledCell = styled.span`
-  background-color: ${props => props.bgColor};
+  background-color: ${(props) => props.bgColor};
   outline: 1px solid black;
-  opacity: ${props => props.opacity};
+  opacity: ${(props) => props.opacity};
 `;
 
-const Cell = ({ index, showVerticalCenter, showHorizontalCenter }) => {
-  const [cellColor, setCellColor] = useState();
+interface CellProps {
+  index: number;
+  showVerticalCenter: boolean;
+  showHorizontalCenter: boolean;
+  color: string; // Add this if it's missing
+}
+
+const Cell: React.FC<CellProps> = ({
+  index,
+  showVerticalCenter,
+  showHorizontalCenter,
+}) => {
+  const [cellColor, setCellColor] = useState("");
   const [opacity, setOpacity] = useState(1);
-  const { cells, setCells, selectedColor, rows, columns } = useContext(GeneralContext);
+  const { cells, setCells, selectedColor, rows, columns } = useGeneralContext();
 
   useEffect(() => {
     setCellColor(cells[index].color);
@@ -20,7 +31,7 @@ const Cell = ({ index, showVerticalCenter, showHorizontalCenter }) => {
     const hortizontalMid = Math.floor(rows / 2);
 
     if (showVerticalCenter) {
-      if (((index - verticalMid) % columns) === 0) {
+      if ((index - verticalMid) % columns === 0) {
         setOpacity(0.5);
       }
     }
@@ -30,7 +41,7 @@ const Cell = ({ index, showVerticalCenter, showHorizontalCenter }) => {
       const max = (hortizontalMid + 1) * rows;
       if (index >= min && index < max) {
         setOpacity(0.5);
-      } 
+      }
     }
   }, [cells, index, showVerticalCenter, showHorizontalCenter, columns, rows]);
 
@@ -38,15 +49,20 @@ const Cell = ({ index, showVerticalCenter, showHorizontalCenter }) => {
     setCellColor(selectedColor);
 
     let allCells = [...cells];
-    let changedCell = {...cells[index]};
+    let changedCell = { ...cells[index] };
     changedCell.color = selectedColor;
     allCells[index] = changedCell;
     setCells(allCells);
-  }
+  };
 
   return (
-    <StyledCell bgColor={cellColor} onClick={changeCellColor} index={index} opacity={opacity} />
-  )
-}
+    <StyledCell
+      bgColor={cellColor}
+      onClick={changeCellColor}
+      index={index}
+      opacity={opacity}
+    />
+  );
+};
 
 export default Cell;

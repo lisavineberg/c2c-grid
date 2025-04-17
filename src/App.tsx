@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import styled from "styled-components";
 
 import ColorSelector from "./components/ColorSelector";
@@ -24,15 +24,48 @@ const Flex = styled.div`
   display: flex;
 `;
 
-export const GeneralContext = createContext();
+type Cell = {
+  color: string;
+};
+
+interface GeneralContextType {
+  cells: Cell[];
+  setCells: React.Dispatch<React.SetStateAction<Cell[]>>;
+  selectedColor: string;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
+  rows: number;
+  columns: number;
+}
+
+export type AnimalGrid = {
+  name: string;
+  rows: number;
+  columns: number;
+  colors: string[];
+  cells: Cell[];
+  storedColors?: string[];
+};
+
+export const GeneralContext = createContext<GeneralContextType | null>(null);
+
+// Use the context safely
+export const useGeneralContext = () => {
+  const context = useContext(GeneralContext);
+  if (!context) {
+    throw new Error(
+      "useGeneralContext must be used within a GeneralContext.Provider"
+    );
+  }
+  return context;
+};
 
 const App = () => {
   const [rows, setRows] = useState(23);
   const [columns, setColumns] = useState(23);
   const [selectedColor, setSelectedColor] = useState("#ffffff");
   const [cells, setCells] = useState([]);
-  const [storedColors, setStoredColors] = useState([]);
-  const [storedImages, setStoredImages] = useState([]);
+  const [storedColors, setStoredColors] = useState<string[]>([]);
+  const [storedImages, setStoredImages] = useState<AnimalGrid[]>([]);
 
   const [showVerticalCenter, setShowVerticalCenter] = useState(false);
   const [showHorizontalCenter, setShowHorizontalCenter] = useState(false);
@@ -49,6 +82,8 @@ const App = () => {
       grid = cells;
     }
 
+    console.log("grid", grid.length);
+
     setCells(grid);
   }, [rows, columns, cells]);
 
@@ -58,7 +93,7 @@ const App = () => {
     });
   }, []);
 
-  const applyStoredImage = (animal) => {
+  const applyStoredImage = (animal: string) => {
     const info = storedImages.find((image) => image.name === animal);
     setStoredColors(info.storedColors || info.colors);
     setCells(info.cells);
@@ -66,7 +101,10 @@ const App = () => {
     setColumns(info.columns);
   };
 
-  const handleRowOrColChange = (name, value) => {
+  const handleRowOrColChange: (
+    name: "rows" | "columns",
+    value: number
+  ) => void = (name, value) => {
     name === "rows" ? setRows(value) : setColumns(value);
   };
 
@@ -120,8 +158,6 @@ const App = () => {
               handleChange={handleRowOrColChange}
             />
             <Storage
-              storedImages={storedImages}
-              storeImage={setStoredImages}
               storedColors={storedColors}
               rows={rows}
               columns={columns}

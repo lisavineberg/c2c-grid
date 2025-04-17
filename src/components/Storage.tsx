@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
-import { GeneralContext } from "./../App";
-import { insertAnimalData } from "./../api";
+import { GeneralContext } from "../App";
+import { insertAnimalData } from "../api";
 
 const Container = styled.div`
   display: flex;
@@ -33,11 +33,17 @@ const Input = styled.input`
   margin-bottom: 20px;
 `;
 
-const Storage = ({ storedColors, rows, columns }) => {
+interface StorageProps {
+  storedColors: string[];
+  rows: number;
+  columns: number;
+}
+
+const Storage: React.FC<StorageProps> = ({ storedColors, rows, columns }) => {
   const { cells } = useContext(GeneralContext);
 
   const [name, setName] = useState("");
-  const addName = (event) => {
+  const addName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 

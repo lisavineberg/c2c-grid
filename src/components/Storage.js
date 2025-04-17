@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
 import { GeneralContext } from "./../App";
-import { create } from './../api';
+import { insertAnimalData } from "./../api";
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Button = styled.button`
   border: 1px solid black;
   color: black;
   cursor: pointer;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   max-width: 200px;
   padding: 5px;
 
@@ -39,7 +39,7 @@ const Storage = ({ storedColors, rows, columns }) => {
   const [name, setName] = useState("");
   const addName = (event) => {
     setName(event.target.value);
-  }
+  };
 
   const addImage = () => {
     if (name) {
@@ -48,11 +48,11 @@ const Storage = ({ storedColors, rows, columns }) => {
         cells,
         storedColors,
         rows,
-        columns
-      }
-      create(grid);
+        columns,
+      };
+      insertAnimalData(grid);
     }
-  }
+  };
 
   return (
     <Container>
@@ -61,7 +61,7 @@ const Storage = ({ storedColors, rows, columns }) => {
       <Input id="name" type="text" onChange={addName} />
       <Button onClick={addImage}>Add image</Button>
     </Container>
-  )
-}
+  );
+};
 
 export default Storage;

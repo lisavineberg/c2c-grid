@@ -1,6 +1,4 @@
-import fetchAll from './fetchAll';
-import create from './create';
-import deleteItem from './delete';
-import editNote from './edit';
+import { readAnimalData } from "./fetchAll";
+import { insertAnimalData } from "./create";
 
-export { fetchAll, create, deleteItem, editNote };
+export { readAnimalData, insertAnimalData };

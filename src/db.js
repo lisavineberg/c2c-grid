@@ -1,7 +1,6 @@
-import faunadb from 'faunadb';
+import { createClient } from "@supabase/supabase-js";
 
-const client = new faunadb.Client({ secret: process.env.REACT_APP_FAUNADB_KEY });
-
-const q = faunadb.query;
-
-export { client, q };
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);

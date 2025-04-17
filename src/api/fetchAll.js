@@ -1,24 +1,13 @@
-import { client, q } from '../db'
+import { supabase } from "../db.js";
 
-const fetchAll = () => client.query(
-  q.Paginate(
-    q.Match(
-      q.Ref('indexes/all_animals')))
-)
-  .then(response => {
-    const animalsRefs = response.data;
-    // create new query out of notes refs. 
-    // https://docs.fauna.com/fauna/current/api/fql/
-    const getAllProductDataQuery = animalsRefs.map((ref) => {
-      return q.Get(ref)
-    })
-    // query the refs
-    return client.query(getAllProductDataQuery).then((data) => {
-      const mappedData = data.map(item => item.data.grid);
-      // console.log("mappedData", mappedData);
-      return mappedData;
-    })
-  })
-  .catch(error => console.warn('error', error.message))
+export async function readAnimalData() {
+  // Fetch all rows from the Animals table
+  const { data, error } = await supabase.from("Animals").select("*");
 
-export default fetchAll;
+  if (error) {
+    console.error("Error fetching animal data:", error);
+    return [];
+  }
+
+  return data;
+}

@@ -1,17 +1,24 @@
-import { client, q } from '../db'
+import { supabase } from "../db.js";
 
-const create = grid => client.query(
-  q.Create(
-    q.Collection('animals'),
-    {
-      data: {
-        grid
+export async function insertAnimalData(animal) {
+  console.log("animal", animal);
+
+  // Insert into Animals table
+  const { data: animalData, error: animalError } = await supabase
+    .from("Animals")
+    .insert([
+      {
+        name: animal.name,
+        rows: animal.rows,
+        columns: animal.columns,
+        stored_colors: animal.storedColors, // Insert as JSON
+        cells: animal.cells, // Insert as JSON
       },
-    },
-  )
-)
-.then(ret => ret)
-.catch(err => console.warn(err))
+    ])
+    .select();
 
-
-export default create;
+  if (animalError) {
+    console.error("Error inserting animal:", animalError);
+    return;
+  }
+}

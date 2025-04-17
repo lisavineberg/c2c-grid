@@ -29,7 +29,7 @@ export const GeneralContext = createContext();
 const App = () => {
   const [rows, setRows] = useState(23);
   const [columns, setColumns] = useState(23);
-  const [selectedColor, setSelectedColor] = useState("#fff");
+  const [selectedColor, setSelectedColor] = useState("#ffffff");
   const [cells, setCells] = useState([]);
   const [storedColors, setStoredColors] = useState([]);
   const [storedImages, setStoredImages] = useState([]);

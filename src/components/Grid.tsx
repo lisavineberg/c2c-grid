@@ -1,45 +1,53 @@
 import React from "react";
-import styled from "styled-components";
-
 import Cell from "./Cell";
 
-const StyledGrid = styled.div`
-  display: grid;
-  flex: 1 0 100%;
-  grid-template-columns: repeat(${(props) => props.cols}, 20px);
-  grid-template-rows: repeat(${(props) => props.rows}, 20px);
-  margin-top: 20px;
-`;
-
 interface GridProps {
-  cells: { color: string }[];
+  grid: { color: string }[];
+  updateCellColor: (row: number, col: number, color: string) => void;
+  columns: number;
   rows: number;
-  cols: number;
-  showVerticalCenter: boolean;
-  showHorizontalCenter: boolean;
+  selectedColor: string;
+  showVerticalCenter?: boolean;
+  showHorizontalCenter?: boolean;
 }
 
 const Grid: React.FC<GridProps> = ({
-  cells,
+  grid,
+  updateCellColor,
+  columns,
   rows,
-  cols,
-  showVerticalCenter,
-  showHorizontalCenter,
+  selectedColor,
+  showVerticalCenter = false,
+  showHorizontalCenter = false,
 }) => {
   return (
-    <StyledGrid rows={rows} cols={cols}>
-      {cells.map((el, index) => {
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${columns}, 20px)`,
+        gridTemplateRows: `repeat(${rows}, 20px)`,
+      }}
+    >
+      {grid.map((cell, index) => {
+        const row = Math.floor(index / columns);
+        const col = index % columns;
+
+        // Calculate the center positions
+        const centerRow = Math.floor(rows / 2);
+        const centerCol = Math.floor(columns / 2);
+        const isVerticalCenter = showVerticalCenter && col === centerCol;
+        const isHorizontalCenter = showHorizontalCenter && row === centerRow;
         return (
           <Cell
             key={index}
-            color={el.color}
-            index={index}
-            showVerticalCenter={showVerticalCenter}
-            showHorizontalCenter={showHorizontalCenter}
+            color={cell.color}
+            onClick={() => updateCellColor(row, col, selectedColor)}
+            isVerticalCenter={isVerticalCenter}
+            isHorizontalCenter={isHorizontalCenter}
           />
         );
       })}
-    </StyledGrid>
+    </div>
   );
 };
 

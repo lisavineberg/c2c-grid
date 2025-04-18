@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import { GeneralContext } from "../App";
 import { insertAnimalData } from "../api";
 
 const Container = styled.div`
@@ -37,11 +36,15 @@ interface StorageProps {
   storedColors: string[];
   rows: number;
   columns: number;
+  cells: { color: string }[];
 }
 
-const Storage: React.FC<StorageProps> = ({ storedColors, rows, columns }) => {
-  const { cells } = useContext(GeneralContext);
-
+const Storage: React.FC<StorageProps> = ({
+  storedColors,
+  rows,
+  columns,
+  cells,
+}) => {
   const [name, setName] = useState("");
   const addName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);

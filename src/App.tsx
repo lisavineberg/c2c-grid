@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import ColorSelector from "./components/ColorSelector";
@@ -28,42 +28,24 @@ type Cell = {
   color: string;
 };
 
-interface GeneralContextType {
-  cells: Cell[];
-  setCells: React.Dispatch<React.SetStateAction<Cell[]>>;
-  selectedColor: string;
-  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
-  rows: number;
-  columns: number;
-}
-
 export type AnimalGrid = {
   name: string;
   rows: number;
   columns: number;
   colors: string[];
   cells: Cell[];
-  storedColors?: string[];
-};
-
-export const GeneralContext = createContext<GeneralContextType | null>(null);
-
-// Use the context safely
-export const useGeneralContext = () => {
-  const context = useContext(GeneralContext);
-  if (!context) {
-    throw new Error(
-      "useGeneralContext must be used within a GeneralContext.Provider"
-    );
-  }
-  return context;
+  stored_colors?: string[];
 };
 
 const App = () => {
   const [rows, setRows] = useState(23);
   const [columns, setColumns] = useState(23);
   const [selectedColor, setSelectedColor] = useState("#ffffff");
-  const [cells, setCells] = useState([]);
+
+  const [cells, setCells] = useState(
+    Array.from({ length: 23 * 23 }, () => ({ color: "#ffffff" }))
+  );
+
   const [storedColors, setStoredColors] = useState<string[]>([]);
   const [storedImages, setStoredImages] = useState<AnimalGrid[]>([]);
 
@@ -71,41 +53,34 @@ const App = () => {
   const [showHorizontalCenter, setShowHorizontalCenter] = useState(false);
 
   useEffect(() => {
-    let grid = [];
-    if (!cells.length) {
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < columns; col++) {
-          grid.push({ color: "#fff" });
-        }
-      }
-    } else {
-      grid = cells;
-    }
-
-    console.log("grid", grid.length);
-
-    setCells(grid);
-  }, [rows, columns, cells]);
-
-  useEffect(() => {
     readAnimalData().then((resp) => {
       setStoredImages(resp);
     });
   }, []);
 
-  const applyStoredImage = (animal: string) => {
-    const info = storedImages.find((image) => image.name === animal);
-    setStoredColors(info.storedColors || info.colors);
-    setCells(info.cells);
-    setRows(info.rows);
-    setColumns(info.columns);
+  const updateCellColor = (row: number, col: number, color: string) => {
+    const index = row * columns + col; // Calculate the index in the flat array
+    setCells((prevCells) => {
+      const newCells = [...prevCells];
+      newCells[index] = { ...newCells[index], color }; // Update the specific cell
+      return newCells;
+    });
   };
 
-  const handleRowOrColChange: (
-    name: "rows" | "columns",
-    value: number
-  ) => void = (name, value) => {
-    name === "rows" ? setRows(value) : setColumns(value);
+  const updateGridSize = (newRows: number, newColumns: number) => {
+    setRows(newRows);
+    setColumns(newColumns);
+    setCells((prevCells) => {
+      const newCells = Array.from(
+        { length: newRows * newColumns },
+        (_, index) => {
+          const row = Math.floor(index / newColumns);
+          const col = index % newColumns;
+          return prevCells[row * columns + col] || { color: "#ffffff" };
+        }
+      );
+      return newCells;
+    });
   };
 
   const showGridline = () => {
@@ -113,66 +88,67 @@ const App = () => {
     setShowHorizontalCenter(!showHorizontalCenter);
   };
 
+  const applyStoredImage = (animal: string) => {
+    const info = storedImages.find((image) => image.name === animal);
+    setStoredColors(info.stored_colors || info.colors);
+    setCells(info.cells);
+    setRows(info.rows);
+    setColumns(info.columns);
+  };
+
   return (
-    <GeneralContext.Provider
-      value={{
-        cells,
-        setCells,
-        selectedColor,
-        setSelectedColor,
-        rows,
-        columns,
-      }}
-    >
-      <StyledApp>
-        <h1>C2C blanket guide</h1>
-        <p>
-          Create custom corner-to-corner blankets based on ChiWei's{" "}
-          <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">
-            "zoodiac" afghan
-          </a>
-          . Create your own pattern, or modify one from the library.
-        </p>
-        <Content>
-          <div>
-            <Flex>
-              <ColorSelector
-                storedColors={storedColors}
-                setStoredColors={setStoredColors}
-              />
-              {storedColors && (
-                <ColorPalette
-                  storedColors={storedColors}
-                  setStored={setStoredColors}
-                />
-              )}
-            </Flex>
-            <button onClick={showGridline}>Show grid lines</button>
-            <Library
-              storedImages={storedImages}
-              applyImage={applyStoredImage}
-            />
-            <Layout
-              rows={rows}
-              cols={columns}
-              handleChange={handleRowOrColChange}
-            />
-            <Storage
+    <StyledApp>
+      <h1>C2C blanket guide</h1>
+      <p>
+        Create custom corner-to-corner blankets based on ChiWei's{" "}
+        <a href="https://www.1dogwoof.com/zoodiacs-c2c-crochet-afghan/">
+          "zoodiac" afghan
+        </a>
+        . Create your own pattern, or modify one from the library.
+      </p>
+      <Content>
+        <div>
+          <Flex>
+            <ColorSelector
               storedColors={storedColors}
-              rows={rows}
-              columns={columns}
+              setStoredColors={setStoredColors}
+              setSelectedColor={setSelectedColor}
+              selectedColor={selectedColor}
+              cells={cells}
+              setCells={setCells}
             />
-          </div>
-          <Grid
-            cells={cells}
+            {storedColors?.length > 0 && (
+              <ColorPalette
+                storedColors={storedColors}
+                setStored={setStoredColors}
+                cells={cells}
+                setCells={setCells}
+                selectedColor={selectedColor}
+                setSelectedColor={setSelectedColor}
+              />
+            )}
+          </Flex>
+          <button onClick={showGridline}>Show grid lines</button>
+          <Library storedImages={storedImages} applyImage={applyStoredImage} />
+          <Layout rows={rows} cols={columns} updateGridSize={updateGridSize} />
+          <Storage
+            storedColors={storedColors}
             rows={rows}
-            cols={columns}
-            showVerticalCenter={showVerticalCenter}
-            showHorizontalCenter={showHorizontalCenter}
+            columns={columns}
+            cells={cells}
           />
-        </Content>
-      </StyledApp>
-    </GeneralContext.Provider>
+        </div>
+        <Grid
+          grid={cells}
+          updateCellColor={updateCellColor}
+          columns={columns}
+          rows={rows}
+          selectedColor={selectedColor}
+          showVerticalCenter={showVerticalCenter}
+          showHorizontalCenter={showHorizontalCenter}
+        />
+      </Content>
+    </StyledApp>
   );
 };
 

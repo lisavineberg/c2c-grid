@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-
-import { GeneralContext } from "../App";
 
 const StyledColorPalette = styled.ul`
   padding: 0;
@@ -44,15 +42,20 @@ const Button = styled.button`
 interface ColorPaletteProps {
   storedColors: string[];
   setStored: (colors: string[]) => void;
+  cells: { color: string }[];
+  setCells: React.Dispatch<React.SetStateAction<{ color: string }[]>>;
+  selectedColor: string;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ColorPalette: React.FC<ColorPaletteProps> = ({
   storedColors,
   setStored,
+  cells,
+  setCells,
+  selectedColor,
+  setSelectedColor,
 }) => {
-  const { cells, setCells, selectedColor, setSelectedColor } =
-    useContext(GeneralContext);
-
   const updateColor = (color: string) => {
     const newColor = selectedColor;
     const newCells = cells.map((cell) => {

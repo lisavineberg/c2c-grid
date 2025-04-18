@@ -14,15 +14,10 @@ const Input = styled.input`
 interface LayoutProps {
   rows: number;
   cols: number;
-  handleChange: (name: string, value: number) => void;
+  updateGridSize: (rows: number, columns: number) => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ rows, cols, handleChange }) => {
-  const handleRowOrColChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    handleChange(name, parseInt(value));
-  };
-
+const Layout: React.FC<LayoutProps> = ({ rows, cols, updateGridSize }) => {
   return (
     <div>
       <h2>
@@ -37,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ rows, cols, handleChange }) => {
           name="rows"
           type="number"
           value={rows}
-          onChange={handleRowOrColChange}
+          onChange={(e) => updateGridSize(parseInt(e.target.value), cols)}
         />
         <label htmlFor="columns">How many columns?</label>
         <Input
@@ -45,7 +40,7 @@ const Layout: React.FC<LayoutProps> = ({ rows, cols, handleChange }) => {
           name="columns"
           type="number"
           value={cols}
-          onChange={handleRowOrColChange}
+          onChange={(e) => updateGridSize(rows, parseInt(e.target.value))}
         />
       </Container>
       {/* } */}

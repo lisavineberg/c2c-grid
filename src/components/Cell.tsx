@@ -1,66 +1,28 @@
-import React, { useState, useContext, useEffect } from "react";
-import styled from "styled-components";
-
-import { GeneralContext, useGeneralContext } from "../App";
-
-const StyledCell = styled.span`
-  background-color: ${(props) => props.bgColor};
-  outline: 1px solid black;
-  opacity: ${(props) => props.opacity};
-`;
+import React from "react";
 
 interface CellProps {
-  index: number;
-  showVerticalCenter: boolean;
-  showHorizontalCenter: boolean;
-  color: string; // Add this if it's missing
+  color: string;
+  onClick: () => void;
+  isVerticalCenter?: boolean;
+  isHorizontalCenter?: boolean;
 }
 
 const Cell: React.FC<CellProps> = ({
-  index,
-  showVerticalCenter,
-  showHorizontalCenter,
+  color,
+  onClick,
+  isVerticalCenter,
+  isHorizontalCenter,
 }) => {
-  const [cellColor, setCellColor] = useState("");
-  const [opacity, setOpacity] = useState(1);
-  const { cells, setCells, selectedColor, rows, columns } = useGeneralContext();
-
-  useEffect(() => {
-    setCellColor(cells[index].color);
-    const verticalMid = Math.floor(columns / 2);
-    const hortizontalMid = Math.floor(rows / 2);
-
-    if (showVerticalCenter) {
-      if ((index - verticalMid) % columns === 0) {
-        setOpacity(0.5);
-      }
-    }
-
-    if (showHorizontalCenter) {
-      const min = (hortizontalMid - 0) * rows;
-      const max = (hortizontalMid + 1) * rows;
-      if (index >= min && index < max) {
-        setOpacity(0.5);
-      }
-    }
-  }, [cells, index, showVerticalCenter, showHorizontalCenter, columns, rows]);
-
-  const changeCellColor = () => {
-    setCellColor(selectedColor);
-
-    let allCells = [...cells];
-    let changedCell = { ...cells[index] };
-    changedCell.color = selectedColor;
-    allCells[index] = changedCell;
-    setCells(allCells);
-  };
-
   return (
-    <StyledCell
-      bgColor={cellColor}
-      onClick={changeCellColor}
-      index={index}
-      opacity={opacity}
+    <div
+      onClick={onClick}
+      style={{
+        width: "20px",
+        height: "20px",
+        backgroundColor: color,
+        border: "1px solid black",
+        opacity: isVerticalCenter || isHorizontalCenter ? 0.5 : 1,
+      }}
     />
   );
 };

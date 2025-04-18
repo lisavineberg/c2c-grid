@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-
-import { GeneralContext } from "../App";
 
 const Container = styled.div`
   display: flex;
@@ -42,15 +40,20 @@ const Button = styled.button`
 interface ColorSelectorProps {
   storedColors: string[];
   setStoredColors: (colors: string[]) => void;
+  setSelectedColor: (color: string) => void;
+  selectedColor: string;
+  cells: { color: string }[];
+  setCells: (cells: { color: string }[]) => void;
 }
 
 const ColorSelector: React.FC<ColorSelectorProps> = ({
   storedColors,
   setStoredColors,
+  setSelectedColor,
+  selectedColor,
+  cells,
+  setCells,
 }) => {
-  const { cells, setCells, selectedColor, setSelectedColor } =
-    useContext(GeneralContext);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedColor(e.target.value);
   };

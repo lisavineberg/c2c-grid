@@ -76,7 +76,7 @@ const App = () => {
         (_, index) => {
           const row = Math.floor(index / newColumns);
           const col = index % newColumns;
-          return prevCells[row * columns + col] || { color: "#ffffff" };
+          return prevCells[row * newColumns + col] || { color: "#ffffff" };
         }
       );
       return newCells;

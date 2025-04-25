@@ -60,17 +60,13 @@ const ColorPalette: React.FC<ColorPaletteProps> = ({
     const newColor = selectedColor;
     const newCells = cells.map((cell) => {
       if (cell.color === color) {
-        cell.color = newColor;
+        return { ...cell, color: newColor };
       }
       return cell;
     });
     setCells(newCells);
-
     const newStoredColors = storedColors.map((item) => {
-      if (item === color) {
-        item = selectedColor;
-      }
-      return item;
+      return item === color ? selectedColor : item;
     });
     setStored(newStoredColors);
   };

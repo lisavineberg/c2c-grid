@@ -1,0 +1,37 @@
+import { loginUser } from "../api";
+
+export const Login = () => {
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
+
+    const user = await loginUser(email, password);
+    if (user) {
+      console.log("User created:", user);
+    } else {
+      console.error("Failed to create user");
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <label>
+          Email:
+          <input type="text" name="email" />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" name="password" />
+        </label>
+        <br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};

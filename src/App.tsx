@@ -6,8 +6,10 @@ import ColorPalette from "./components/ColorPalette";
 import Library from "./components/Library";
 import Layout from "./components/Layout";
 import Storage from "./components/Storage";
+import { SignUp } from "./components/SignUp";
 import Grid from "./components/Grid";
 import { readAnimalData } from "./api";
+import { Login } from "./components/Login";
 
 const StyledApp = styled.div`
   font-family: "Open Sans";
@@ -106,6 +108,8 @@ const App = () => {
         </a>
         . Create your own pattern, or modify one from the library.
       </p>
+      <SignUp />
+      <Login />
       <Content>
         <div>
           <Flex>

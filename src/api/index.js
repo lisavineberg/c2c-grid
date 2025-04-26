@@ -1,4 +1,6 @@
 import { readAnimalData } from "./fetchAll";
-import { insertAnimalData } from "./create";
+import { insertPatternData } from "./insertPattern";
+import { createUser } from "./createUser";
+import { loginUser } from "./loginUser";
 
-export { readAnimalData, insertAnimalData };
+export { readAnimalData, insertPatternData, createUser, loginUser };

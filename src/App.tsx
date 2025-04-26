@@ -50,18 +50,22 @@ export type AnimalGrid = {
   colors: string[];
   cells: Cell[];
   stored_colors?: string[];
+  id: string;
 };
 
 const App = () => {
   const [rows, setRows] = useState(23);
   const [columns, setColumns] = useState(23);
+  const [name, setName] = useState("");
   const [selectedColor, setSelectedColor] = useState("#ffffff");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<string | null>(null);
+  const [patternId, setPatternId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       const user = await getUser(); // Wait for the promise to resolve
-      setIsLoggedIn(!!user); // Set the state based on whether a user exists
+      console.log("User:", user);
+      setIsLoggedIn(user.id); // Set the state based on whether a user exists
     };
 
     fetchUser();
@@ -119,6 +123,8 @@ const App = () => {
     setCells(info.cells);
     setRows(info.rows);
     setColumns(info.columns);
+    setName(info.name);
+    setPatternId(info.id);
   };
 
   return (
@@ -156,14 +162,18 @@ const App = () => {
           <Button onClick={showGridline}>Show grid lines</Button>
           <Library storedImages={storedImages} applyImage={applyStoredImage} />
           <Layout rows={rows} cols={columns} updateGridSize={updateGridSize} />
-          {isLoggedIn && (
+          {isLoggedIn ? (
             <Storage
               storedColors={storedColors}
               rows={rows}
               columns={columns}
               cells={cells}
+              name={name}
+              setName={setName}
+              isLoggedIn={isLoggedIn}
+              patternId={patternId}
             />
-          )}
+          ) : null}
         </div>
         <Grid
           grid={cells}

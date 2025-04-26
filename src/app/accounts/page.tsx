@@ -24,7 +24,7 @@ const Button = styled.button`
   }
 `;
 
-export const Accounts = () => {
+const Accounts = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
   useEffect(() => {

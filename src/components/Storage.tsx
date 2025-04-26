@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { insertAnimalData } from "../api";
+import { insertPatternData } from "../api";
 
 const Container = styled.div`
   display: flex;
@@ -59,7 +59,7 @@ const Storage: React.FC<StorageProps> = ({
         rows,
         columns,
       };
-      insertAnimalData(grid);
+      insertPatternData(grid);
     }
   };
 

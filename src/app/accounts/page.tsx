@@ -29,12 +29,12 @@ export const Accounts = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await getUser(); // Wait for the promise to resolve
-      setIsLoggedIn(!!user); // Set the state based on whether a user exists
+      const user = await getUser();
+      setIsLoggedIn(!!user);
     };
 
     fetchUser();
-  }, []);
+  }, [isLoggedIn]);
 
   const handleLogout = async () => {
     const loggedOut = await logOutUser();
@@ -54,8 +54,8 @@ export const Accounts = () => {
         </div>
       ) : (
         <StyledAccounts>
-          <LoginSignup type="signup" />
-          <LoginSignup type="login" />
+          <LoginSignup type="signup" setIsLoggedIn={setIsLoggedIn} />
+          <LoginSignup type="login" setIsLoggedIn={setIsLoggedIn} />
         </StyledAccounts>
       )}
     </div>

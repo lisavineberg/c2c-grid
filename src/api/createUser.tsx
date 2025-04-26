@@ -7,7 +7,6 @@ export async function createUser(email: string, password: string) {
   });
 
   if (error) {
-    console.error("Error creating user:", error);
     return null;
   }
 

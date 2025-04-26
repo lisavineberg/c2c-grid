@@ -1,8 +1,10 @@
 import { loginUser } from "../api";
 import { createUser } from "../api";
 import styled from "styled-components";
+import { useState } from "react";
 
 const StyledForm = styled.form`
+  align-items: start;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -28,11 +30,21 @@ const Label = styled.label`
   flex-direction: column;
 `;
 
+const ErrorMessage = styled.p`
+  color: red;
+`;
+
 interface LoginSignupProps {
   type: "login" | "signup";
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
 
-export const LoginSignup: React.FC<LoginSignupProps> = ({ type }) => {
+export const LoginSignup: React.FC<LoginSignupProps> = ({
+  type,
+  setIsLoggedIn,
+}) => {
+  const [error, setError] = useState("");
+
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -42,17 +54,19 @@ export const LoginSignup: React.FC<LoginSignupProps> = ({ type }) => {
 
     if (type === "signup") {
       const user = await createUser(email, password);
-      if (user) {
-        console.log("User created:", user);
+      if (!user) {
+        setError("Error creating user");
       } else {
-        console.error("Failed to create user");
+        setError("");
+        setIsLoggedIn(true);
       }
     } else {
       const user = await loginUser(email, password);
-      if (user) {
-        console.log("User logged in:", user);
+      if (!user) {
+        setError("Error logging in");
       } else {
-        console.error("Failed to log in user");
+        setError("");
+        setIsLoggedIn(true);
       }
     }
   };
@@ -73,6 +87,7 @@ export const LoginSignup: React.FC<LoginSignupProps> = ({ type }) => {
           {type === "signup" ? "Sign up" : "Log in"}
         </Button>
       </StyledForm>
+      {error.length ? <ErrorMessage>{error}</ErrorMessage> : null}
     </div>
   );
 };

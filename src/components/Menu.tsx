@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-const Menu = () => {
+function Menu() {
   return (
-    <div className="menu">
+    <div style={{ display: "flex", gap: "20px" }}>
       <Link href="/">Home</Link>
       <Link href="/accounts">Accounts</Link>
     </div>
   );
-};
+}
+
 export default Menu;

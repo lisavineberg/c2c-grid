@@ -6,10 +6,8 @@ import ColorPalette from "./components/ColorPalette";
 import Library from "./components/Library";
 import Layout from "./components/Layout";
 import Storage from "./components/Storage";
-import { SignUp } from "./components/SignUp";
 import Grid from "./components/Grid";
-import { readAnimalData } from "./api";
-import { Login } from "./components/Login";
+import { readAnimalData, getUser } from "./api";
 
 const StyledApp = styled.div`
   font-family: "Open Sans";
@@ -24,6 +22,21 @@ const Content = styled.div`
 
 const Flex = styled.div`
   display: flex;
+`;
+
+const Button = styled.button`
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  font-family: "Open Sans";
+  max-width: 200px;
+  padding: 5px;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 `;
 
 type Cell = {
@@ -43,6 +56,16 @@ const App = () => {
   const [rows, setRows] = useState(23);
   const [columns, setColumns] = useState(23);
   const [selectedColor, setSelectedColor] = useState("#ffffff");
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser(); // Wait for the promise to resolve
+      setIsLoggedIn(!!user); // Set the state based on whether a user exists
+    };
+
+    fetchUser();
+  }, []);
 
   const [cells, setCells] = useState(
     Array.from({ length: 23 * 23 }, () => ({ color: "#ffffff" }))
@@ -108,8 +131,6 @@ const App = () => {
         </a>
         . Create your own pattern, or modify one from the library.
       </p>
-      <SignUp />
-      <Login />
       <Content>
         <div>
           <Flex>
@@ -132,15 +153,17 @@ const App = () => {
               />
             )}
           </Flex>
-          <button onClick={showGridline}>Show grid lines</button>
+          <Button onClick={showGridline}>Show grid lines</Button>
           <Library storedImages={storedImages} applyImage={applyStoredImage} />
           <Layout rows={rows} cols={columns} updateGridSize={updateGridSize} />
-          <Storage
-            storedColors={storedColors}
-            rows={rows}
-            columns={columns}
-            cells={cells}
-          />
+          {isLoggedIn && (
+            <Storage
+              storedColors={storedColors}
+              rows={rows}
+              columns={columns}
+              cells={cells}
+            />
+          )}
         </div>
         <Grid
           grid={cells}

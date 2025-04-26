@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Menu from "../components/Menu";
 
 export const metadata: Metadata = {
   title: `Lisa's Crochet App`,
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Menu />
         <div id="root">{children}</div>
       </body>
     </html>

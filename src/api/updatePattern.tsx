@@ -1,7 +1,7 @@
 import { supabase } from "../db.js";
 
 export async function updatePattern(pattern) {
-  console.log("Updating pattern with name:", pattern.patternId);
+  if (pattern.isPublic) return;
   const { data, error } = await supabase
     .from("Animals")
     .update({
@@ -14,7 +14,6 @@ export async function updatePattern(pattern) {
     })
     .eq("id", pattern.patternId);
 
-  console.log("Update result:", data, error);
   if (error) {
     return null;
   }

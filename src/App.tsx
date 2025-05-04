@@ -51,6 +51,7 @@ export type AnimalGrid = {
   cells: Cell[];
   stored_colors?: string[];
   id: string;
+  is_public: boolean;
 };
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
   const [selectedColor, setSelectedColor] = useState("#ffffff");
   const [isLoggedIn, setIsLoggedIn] = useState<string | null>(null);
   const [patternId, setPatternId] = useState<string | null>(null);
+  const [isPublic, setIsPublic] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -82,10 +84,10 @@ const App = () => {
   const [showHorizontalCenter, setShowHorizontalCenter] = useState(false);
 
   useEffect(() => {
-    readAnimalData().then((resp) => {
+    readAnimalData(isLoggedIn).then((resp) => {
       setStoredImages(resp);
     });
-  }, []);
+  }, [isLoggedIn]);
 
   const updateCellColor = (row: number, col: number, color: string) => {
     const index = row * columns + col; // Calculate the index in the flat array
@@ -125,6 +127,7 @@ const App = () => {
     setColumns(info.columns);
     setName(info.name);
     setPatternId(info.id);
+    setIsPublic(info.is_public);
   };
 
   return (
@@ -172,6 +175,7 @@ const App = () => {
               setName={setName}
               isLoggedIn={isLoggedIn}
               patternId={patternId}
+              isPublic={isPublic}
             />
           ) : null}
         </div>

@@ -5,6 +5,7 @@ import { loginUser } from "./loginUser";
 import { getUser } from "./getUser";
 import { logOutUser } from "./logOut";
 import { updatePattern } from "./updatePattern";
+import { deletePattern } from "./deletePattern";
 
 export {
   readAnimalData,
@@ -14,4 +15,5 @@ export {
   getUser,
   logOutUser,
   updatePattern,
+  deletePattern,
 };

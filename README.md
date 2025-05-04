@@ -6,6 +6,5 @@ TODO
 
 - on submit of grid, show success/fail (reset grid?)
 - add stars to original blanket ones
-- ability to delete pattern, edit pattern (stop fetching by name?)
-- only fetch patterns associated with your account
+- ability to delete pattern (add RLS), edit pattern (stop fetching by name?)
 - general style (tailwind?)

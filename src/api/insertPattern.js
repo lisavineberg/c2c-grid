@@ -10,6 +10,7 @@ export async function insertPatternData(animal) {
         columns: animal.columns,
         stored_colors: animal.storedColors, // Insert as JSON
         cells: animal.cells, // Insert as JSON
+        creator_id: animal.creatorId,
       },
     ])
     .select();

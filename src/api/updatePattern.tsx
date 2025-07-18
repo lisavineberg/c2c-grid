@@ -1,6 +1,7 @@
 import { supabase } from "../db.js";
+import { Pattern } from "./types";
 
-export async function updatePattern(pattern) {
+export async function updatePattern(pattern: Pattern) {
   if (pattern.isPublic) return;
   const { data, error } = await supabase
     .from("Animals")

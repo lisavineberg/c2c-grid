@@ -67,7 +67,7 @@ const App = () => {
     const fetchUser = async () => {
       const user = await getUser(); // Wait for the promise to resolve
       console.log("User:", user);
-      setIsLoggedIn(user.id); // Set the state based on whether a user exists
+      setIsLoggedIn(user?.id); // Set the state based on whether a user exists
     };
 
     fetchUser();

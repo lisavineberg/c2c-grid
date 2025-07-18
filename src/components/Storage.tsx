@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import { insertPatternData } from "../api";
+import { insertPatternData, updatePattern, deletePattern } from "../api";
 
 const Container = styled.div`
   display: flex;
@@ -37,6 +37,11 @@ interface StorageProps {
   rows: number;
   columns: number;
   cells: { color: string }[];
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  isLoggedIn: string | null;
+  patternId: string | null;
+  isPublic?: boolean;
 }
 
 const Storage: React.FC<StorageProps> = ({
@@ -44,22 +49,50 @@ const Storage: React.FC<StorageProps> = ({
   rows,
   columns,
   cells,
+  name,
+  setName,
+  isLoggedIn,
+  patternId,
+  isPublic,
 }) => {
-  const [name, setName] = useState("");
   const addName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 
   const addImage = () => {
-    if (name) {
+    if (name && isLoggedIn) {
       const grid = {
         name,
         cells,
         storedColors,
         rows,
         columns,
+        creatorId: isLoggedIn,
       };
       insertPatternData(grid);
+    }
+  };
+
+  const editPattern = () => {
+    if (isLoggedIn && patternId) {
+      const grid = {
+        name,
+        cells,
+        storedColors,
+        rows,
+        columns,
+        creatorId: isLoggedIn,
+        patternId,
+        isPublic,
+      };
+
+      updatePattern(grid);
+    }
+  };
+
+  const handleDeletePattern = () => {
+    if (isLoggedIn && patternId) {
+      deletePattern(patternId, isPublic);
     }
   };
 
@@ -67,8 +100,14 @@ const Storage: React.FC<StorageProps> = ({
     <Container>
       <h2>Storage</h2>
       <label htmlFor="name">Name your image</label>
-      <Input id="name" type="text" onChange={addName} />
+      <Input id="name" type="text" onChange={addName} value={name} />
       <Button onClick={addImage}>Add image</Button>
+      {isPublic ? null : (
+        <>
+          <Button onClick={editPattern}>Edit Pattern</Button>
+          <Button onClick={handleDeletePattern}>Delete Pattern</Button>
+        </>
+      )}
     </Container>
   );
 };

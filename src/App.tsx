@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
 import ColorSelector from "./components/ColorSelector";
@@ -89,16 +89,19 @@ const App = () => {
     });
   }, [isLoggedIn]);
 
-  const updateCellColor = (row: number, col: number, color: string) => {
-    const index = row * columns + col; // Calculate the index in the flat array
-    setCells((prevCells) => {
-      const newCells = [...prevCells];
-      newCells[index] = { ...newCells[index], color }; // Update the specific cell
-      return newCells;
-    });
-  };
+  const updateCellColor = useCallback(
+    (row: number, col: number, color: string) => {
+      const index = row * columns + col;
+      setCells((prevCells) => {
+        const newCells = [...prevCells];
+        newCells[index] = { ...newCells[index], color };
+        return newCells;
+      });
+    },
+    [columns]
+  );
 
-  const updateGridSize = (newRows: number, newColumns: number) => {
+  const updateGridSize = useCallback((newRows: number, newColumns: number) => {
     setRows(newRows);
     setColumns(newColumns);
     setCells((prevCells) => {
@@ -112,12 +115,12 @@ const App = () => {
       );
       return newCells;
     });
-  };
+  }, []);
 
-  const showGridline = () => {
-    setShowVerticalCenter(!showVerticalCenter);
-    setShowHorizontalCenter(!showHorizontalCenter);
-  };
+  const showGridline = useCallback(() => {
+    setShowVerticalCenter((prev) => !prev);
+    setShowHorizontalCenter((prev) => !prev);
+  }, []);
 
   const applyStoredImage = (animal: string) => {
     const info = storedImages.find((image) => image.name === animal);

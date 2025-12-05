@@ -1,6 +1,7 @@
 import { supabase } from "../db.js";
+import { Pattern } from "./types.js";
 
-export async function insertPatternData(animal) {
+export async function insertPatternData(animal: Pattern) {
   const { data: animalData, error: animalError } = await supabase
     .from("Animals")
     .insert([

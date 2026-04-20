@@ -1,6 +1,7 @@
 import { supabase } from "../db.js";
+import { Pattern } from "./types.js";
 
-export async function insertPatternData(animal) {
+export async function insertPatternData(animal: Pattern) {
   const { data: animalData, error: animalError } = await supabase
     .from("Animals")
     .insert([
@@ -10,6 +11,7 @@ export async function insertPatternData(animal) {
         columns: animal.columns,
         stored_colors: animal.storedColors, // Insert as JSON
         cells: animal.cells, // Insert as JSON
+        creator_id: animal.creatorId,
       },
     ])
     .select();

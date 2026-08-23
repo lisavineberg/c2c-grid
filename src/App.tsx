@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
 import ColorSelector from "./components/ColorSelector";
@@ -50,18 +50,24 @@ export type AnimalGrid = {
   colors: string[];
   cells: Cell[];
   stored_colors?: string[];
+  id: string;
+  is_public: boolean;
 };
 
 const App = () => {
   const [rows, setRows] = useState(23);
   const [columns, setColumns] = useState(23);
+  const [name, setName] = useState("");
   const [selectedColor, setSelectedColor] = useState("#ffffff");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<string | null>(null);
+  const [patternId, setPatternId] = useState<string | null>(null);
+  const [isPublic, setIsPublic] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
       const user = await getUser(); // Wait for the promise to resolve
-      setIsLoggedIn(!!user); // Set the state based on whether a user exists
+      console.log("User:", user);
+      setIsLoggedIn(user?.id); // Set the state based on whether a user exists
     };
 
     fetchUser();
@@ -78,21 +84,24 @@ const App = () => {
   const [showHorizontalCenter, setShowHorizontalCenter] = useState(false);
 
   useEffect(() => {
-    readAnimalData().then((resp) => {
+    readAnimalData(isLoggedIn).then((resp) => {
       setStoredImages(resp);
     });
-  }, []);
+  }, [isLoggedIn]);
 
-  const updateCellColor = (row: number, col: number, color: string) => {
-    const index = row * columns + col; // Calculate the index in the flat array
-    setCells((prevCells) => {
-      const newCells = [...prevCells];
-      newCells[index] = { ...newCells[index], color }; // Update the specific cell
-      return newCells;
-    });
-  };
+  const updateCellColor = useCallback(
+    (row: number, col: number, color: string) => {
+      const index = row * columns + col;
+      setCells((prevCells) => {
+        const newCells = [...prevCells];
+        newCells[index] = { ...newCells[index], color };
+        return newCells;
+      });
+    },
+    [columns]
+  );
 
-  const updateGridSize = (newRows: number, newColumns: number) => {
+  const updateGridSize = useCallback((newRows: number, newColumns: number) => {
     setRows(newRows);
     setColumns(newColumns);
     setCells((prevCells) => {
@@ -106,12 +115,12 @@ const App = () => {
       );
       return newCells;
     });
-  };
+  }, []);
 
-  const showGridline = () => {
-    setShowVerticalCenter(!showVerticalCenter);
-    setShowHorizontalCenter(!showHorizontalCenter);
-  };
+  const showGridline = useCallback(() => {
+    setShowVerticalCenter((prev) => !prev);
+    setShowHorizontalCenter((prev) => !prev);
+  }, []);
 
   const applyStoredImage = (animal: string) => {
     const info = storedImages.find((image) => image.name === animal);
@@ -119,6 +128,9 @@ const App = () => {
     setCells(info.cells);
     setRows(info.rows);
     setColumns(info.columns);
+    setName(info.name);
+    setPatternId(info.id);
+    setIsPublic(info.is_public);
   };
 
   return (
@@ -156,14 +168,19 @@ const App = () => {
           <Button onClick={showGridline}>Show grid lines</Button>
           <Library storedImages={storedImages} applyImage={applyStoredImage} />
           <Layout rows={rows} cols={columns} updateGridSize={updateGridSize} />
-          {isLoggedIn && (
+          {isLoggedIn ? (
             <Storage
               storedColors={storedColors}
               rows={rows}
               columns={columns}
               cells={cells}
+              name={name}
+              setName={setName}
+              isLoggedIn={isLoggedIn}
+              patternId={patternId}
+              isPublic={isPublic}
             />
-          )}
+          ) : null}
         </div>
         <Grid
           grid={cells}
